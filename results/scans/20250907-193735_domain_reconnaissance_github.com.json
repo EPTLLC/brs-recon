@@ -1,0 +1,418 @@
+{
+  "timestamp": "20250907-193735",
+  "target": "github.com",
+  "scan_type": "Domain Reconnaissance",
+  "status": "completed",
+  "data": {
+    "target": "github.com",
+    "domain_info": {
+      "domain": "github.com",
+      "ip_addresses": [
+        "20.26.156.215"
+      ],
+      "mail_servers": [
+        "aspmx.l.google.com",
+        "alt1.aspmx.l.google.com",
+        "alt2.aspmx.l.google.com",
+        "alt3.aspmx.l.google.com",
+        "alt4.aspmx.l.google.com"
+      ],
+      "name_servers": [
+        "dns4.p08.nsone.net",
+        "ns-1283.awsdns-32.org",
+        "ns-1707.awsdns-21.co.uk",
+        "ns-421.awsdns-52.com",
+        "ns-520.awsdns-01.net",
+        "dns1.p08.nsone.net",
+        "dns2.p08.nsone.net",
+        "dns3.p08.nsone.net"
+      ],
+      "has_www": true,
+      "subdomain_count": 9
+    },
+    "dns_records": {
+      "A": [
+        "20.26.156.215"
+      ],
+      "MX": [
+        "1 aspmx.l.google.com.",
+        "5 alt1.aspmx.l.google.com.",
+        "5 alt2.aspmx.l.google.com.",
+        "10 alt3.aspmx.l.google.com.",
+        "10 alt4.aspmx.l.google.com."
+      ],
+      "NS": [
+        "dns4.p08.nsone.net.",
+        "ns-1283.awsdns-32.org.",
+        "ns-1707.awsdns-21.co.uk.",
+        "ns-421.awsdns-52.com.",
+        "ns-520.awsdns-01.net.",
+        "dns1.p08.nsone.net.",
+        "dns2.p08.nsone.net.",
+        "dns3.p08.nsone.net."
+      ],
+      "TXT": [
+        "\"adobe-idp-site-verification=b92c9e999aef825edc36e0a3d847d2dbad5b2fc0e05c79ddd7a16139b48ecf4b\"",
+        "\"apple-domain-verification=RyQhdzTl6Z6x8ZP4\"",
+        "\"atlassian-domain-verification=jjgw98AKv2aeoYFxiL/VFaoyPkn3undEssTRuMg6C/3Fp/iqhkV4HVV7WjYlVeF8\"",
+        "\"calendly-site-verification=at0DQARi7IZvJtXQAWhMqpmIzpvoBNF7aam5VKKxP\"",
+        "\"docusign=087098e3-3d46-47b7-9b4e-8a23028154cd\"",
+        "\"facebook-domain-verification=39xu4jzl7roi7x0n93ldkxjiaarx50\"",
+        "\"google-site-verification=82Le34Flgtd15ojYhHlGF_6g72muSjamlMVThBOJpks\"",
+        "\"google-site-verification=UTM-3akMgubp6tQtgEuAkYNYLyYAvpTnnSrDMWoDR3o\"",
+        "\"jamf-site-verification=XtaPNIYghF_e_xRDI8CjgQ\"",
+        "\"krisp-domain-verification=ZlyiK7XLhnaoUQb2hpak1PLY7dFkl1WE\"",
+        "\"loom-site-verification=f3787154f1154b7880e720a511ea664d\"",
+        "\"miro-verification=d2e174fdb00c71e0bcf58f8e58c3da2dd80dcfa9\"",
+        "\"shopify-verification-code=t1YPwcmvnxZyBycaCpk1MPyWoFs72o\"",
+        "\"stripe-verification=f88ef17321660a01bab1660454192e014defa29ba7b8de9633c69d6b4912217f\"",
+        "\"v=spf1 ip4:192.30.252.0/22 include:_netblocks.google.com include:_netblocks2.google.com include:_netblocks3.google.com include:spf.protection.outlook.com include:mail.zendesk.com include:_spf.salesforce.com include:servers.mcsv.net include:mktomail.com ip\" \"4:62.253.227.114 ip4:166.78.69.169 ip4:166.78.69.170 ip4:166.78.71.131 ip4:167.89.101.2 ip4:167.89.101.192/28 ip4:192.254.112.60 ip4:192.254.112.98/31 ip4:192.254.113.10 ip4:192.254.113.101 ip4:192.254.114.176  ~all\"",
+        "\"MS=6BF03E6AF5CB689E315FB6199603BABF2C88D805\"",
+        "\"MS=ms44452932\"",
+        "\"MS=ms58704441\""
+      ],
+      "SOA": [
+        "dns1.p08.nsone.net. hostmaster.nsone.net. 1656468023 43200 7200 1209600 3600"
+      ]
+    },
+    "whois_info": {
+      "registrar": "markmonitor, inc.",
+      "creation_date": "2007-10-09t18:20:50+0000",
+      "expiration_date": "2026-10-09t00:00:00+0000",
+      "name_servers": [
+        "dns1.p08.nsone.net",
+        "dns2.p08.nsone.net",
+        "dns3.p08.nsone.net",
+        "dns4.p08.nsone.net",
+        "ns-1283.awsdns-32.org",
+        "ns-1707.awsdns-21.co.uk",
+        "ns-421.awsdns-52.com",
+        "ns-520.awsdns-01.net"
+      ],
+      "status": "clientdeleteprohibited (https://www.icann.org/epp#clientdeleteprohibited)",
+      "registrant": "",
+      "raw_output": "   Domain Name: GITHUB.COM\n   Registry Domain ID: 1264983250_DOMAIN_COM-VRSN\n   Registrar WHOIS Server: whois.markmonitor.com\n   Registrar URL: http://www.markmonitor.com\n   Updated Date: 2024-09-07T09:16:32Z\n   Creation Date: 2007-10-09T18:20:50Z\n   Registry Expiry Date: 2026-10-09T18:20:50Z\n   Registrar: MarkMonitor Inc.\n   Registrar IANA ID: 292\n   Registrar Abuse Contact Email: abusecomplaints@markmonitor.com\n   Registrar Abuse Contact Phone: +1.2086851750\n   Domain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited\n   Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\n   Domain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited\n   Name Server: DNS1.P08.NSONE.NET\n   Name Server: DNS2.P08.NSONE.NET\n   Name Server: DNS3.P08.NSONE.NET\n   Name Server: DNS4.P08.NSONE.NET\n   Name Server: NS-1283.AWSDNS-32.ORG\n   Name Server: NS-1707.AWSDNS-21.CO.UK\n   Name Server: NS-421.AWSDNS-52.COM\n   Name Server: NS-520.AWSDNS-01.NET\n   DNSSEC: unsigned\n   URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/\n>>> Last update of whois database: 2025-09-07T16:36:59Z <<<\n\nFor more information on Whois status codes, please visit https://icann.org/epp\n\nNOTICE: The expiration date displayed in this record is the date the\nregistrar's sponsorship of the domain name registration in the registry is\ncurrently set to expire. This date does not necessarily reflect the expiration\ndate of the domain name registrant's agreement with the sponsoring\nregistrar.  Users may consult the sponsoring registrar's Whois database to\nview the registrar's reported date of expiration for this registration.\n\nTERMS OF USE: You are not authorized to access or query our Whois\ndatabase through the use of electronic processes that are high-volume and\nautomated except as reasonably necessary to register domain names or\nmodify existing registrations; the Data in VeriSign Global Registry\nServices' (\"VeriSign\") Whois database is provided by VeriSign for\ninformation purposes only, and to assist persons in obtaining information\nabout or related to a domain name registration record. VeriSign does not\nguarantee its accuracy. By submitting a Whois query, you agree to abide\nby the following terms of use: You agree that you may use this Data only\nfor lawful purposes and that under no circumstances will you use this Data\nto: (1) allow, enable, or otherwise support the transmission of mass\nunsolicited, commercial advertising or solicitations via e-mail, telephone,\nor facsimile; or (2) enable high volume, automated, electronic processes\nthat apply to VeriSign (or its computer systems). The compilation,\nrepackaging, dissemination or other use of this Data is expressly\nprohibited without the prior written consent of VeriSign. You agree not to\nuse electronic processes that are automated and high-volume to access or\nquery the Whois database except as reasonably necessary to register\ndomain names or modify existing registrations. VeriSign reserves the right\nto restrict your access to the Whois database in its sole discretion to ensure\noperational stability.  VeriSign may restrict or terminate your access to the\nWhois database for failure to abide by these terms of use. VeriSign\nreserves the right to modify these terms at any time.\n\nThe Registry database contains ONLY .COM, .NET, .EDU domains and\nRegistrars.\nDomain Name: github.com\nRegistry Domain ID: 1264983250_DOMAIN_COM-VRSN\nRegistrar WHOIS Server: whois.markmonitor.com\nRegistrar URL: http://www.markmonitor.com\nUpdated Date: 2024-09-07T09:16:33+0000\nCreation Date: 2007-10-09T18:20:50+0000\nRegistrar Registration Expiration Date: 2026-10-09T00:00:00+0000\nRegistrar: MarkMonitor, Inc.\nRegistrar IANA ID: 292\nRegistrar Abuse Contact Email: abusecomplaints@markmonitor.com\nRegistrar Abuse Contact Phone: +1.2086851750\nDomain Status: clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)\nDomain Status: clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)\nDomain Status: clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)\nRegistrant Organization: GitHub, Inc.\nRegistrant Country: US\nRegistrant Email: Select Request Email Form at https://domains.markmonitor.com/whois/github.com\nTech Email: Select Request Email Form at https://domains.markmonitor.com/whois/github.com\nName Server: ns-1707.awsdns-21.co.uk\nName Server: ns-421.awsdns-52.com\nName Server: dns3.p08.nsone.net\nName Server: ns-520.awsdns-01.net\nName Server: ns-1283.awsdns-32.org\nName Server: dns2.p08.nsone.net\nName Server: dns1.p08.nsone.net\nName Server: dns4.p08.nsone.net\nDNSSEC: unsigned\nURL of the ICANN WHOIS Data Problem Reporting System: http://wdprs.internic.net/\n>>> Last update of WHOIS database: 2025-09-07T16:32:16+0000 <<<\n\nFor more information on WHOIS status codes, please visit:\n  https://www.icann.org/resources/pages/epp-status-codes\n\nIf you wish to contact this domain’s Registrant or Technical\ncontact, and such email address is not visible above, you may do so via our web\nform, pursuant to ICANN’s Temporary Specification. To verify that you are not a\nrobot, please enter your email address to receive a link to a page that\nfacilitates email communication with the relevant contact(s).\n\nWeb-based WHOIS:\n  https://domains.markmonitor.com/whois/contact/github.com\n\nIf you have a legitimate interest in viewing the non-public WHOIS details, send\nyour request and the reasons for your request to whoisrequest@markmonitor.com\nand specify the domain name in the subject line. We will review that request and\nmay ask for supporting documentation and explanation.\n\nThe data in MarkMonitor’s WHOIS database is provided for information purposes,\nand to assist persons in obtaining information about or related to a domain\nname’s registration record. While MarkMonitor believes the data to be accurate,\nthe data is provided \"as is\" with no guarantee or warranties regarding its\naccuracy.\n\nBy submitting a WHOIS query, you agree that you will use this data only for\nlawful purposes and that, under no circumstances will you use this data to:\n  (1) allow, enable, or otherwise support the transmission by email, telephone,\nor facsimile of mass, unsolicited, commercial advertising, or spam; or\n  (2) enable high volume, automated, or electronic processes that send queries,\ndata, or email to MarkMonitor (or its systems) or the domain name contacts (or\nits systems).\n\nMarkMonitor reserves the right to modify these terms at any time.\n\nBy submitting this query, you agree to abide by this policy.\n\nMarkMonitor Domain Management(TM)\nProtecting companies and consumers in a digital world.\n\nVisit MarkMonitor at https://www.markmonitor.com\nContact us at +1.8007459229\nIn Europe, at +44.02032062220\n--\n"
+    },
+    "subdomains": [
+      "admin.github.com",
+      "api.github.com",
+      "blog.github.com",
+      "docs.github.com",
+      "help.github.com",
+      "shop.github.com",
+      "support.github.com",
+      "test.github.com",
+      "www.github.com"
+    ],
+    "scan_summary": {
+      "scan_type": "comprehensive",
+      "dns_records_found": 5,
+      "subdomains_found": 9,
+      "zone_transfer_possible": false,
+      "has_whois": true
+    },
+    "subdomain_dns": {
+      "admin.github.com": {
+        "A": [
+          "glb-2a3c35-public-internal.githubapp.com.",
+          "140.82.112.24"
+        ],
+        "AAAA": [
+          "glb-2a3c35-public-internal.githubapp.com."
+        ],
+        "CNAME": [
+          "glb-2a3c35-public-internal.githubapp.com."
+        ],
+        "MX": [
+          "glb-2a3c35-public-internal.githubapp.com."
+        ],
+        "NS": [
+          "glb-2a3c35-public-internal.githubapp.com."
+        ],
+        "TXT": [
+          "glb-2a3c35-public-internal.githubapp.com."
+        ]
+      },
+      "api.github.com": {
+        "A": [
+          "20.26.156.210"
+        ]
+      },
+      "blog.github.com": {
+        "A": [
+          "github.github.io.",
+          "185.199.111.153",
+          "185.199.108.153",
+          "185.199.109.153",
+          "185.199.110.153"
+        ],
+        "AAAA": [
+          "github.github.io.",
+          "2606:50c0:8003::153",
+          "2606:50c0:8000::153",
+          "2606:50c0:8001::153",
+          "2606:50c0:8002::153"
+        ],
+        "CNAME": [
+          "github.github.io."
+        ],
+        "MX": [
+          "github.github.io."
+        ],
+        "NS": [
+          "github.github.io."
+        ],
+        "TXT": [
+          "github.github.io."
+        ],
+        "SOA": [
+          "github.github.io."
+        ]
+      },
+      "docs.github.com": {
+        "A": [
+          "185.199.109.154",
+          "185.199.108.154",
+          "185.199.110.154",
+          "185.199.111.154"
+        ],
+        "AAAA": [
+          "2606:50c0:8000::154",
+          "2606:50c0:8001::154",
+          "2606:50c0:8002::154",
+          "2606:50c0:8003::154"
+        ]
+      },
+      "help.github.com": {
+        "A": [
+          "redirect.github.com.",
+          "140.82.112.18"
+        ],
+        "AAAA": [
+          "redirect.github.com."
+        ],
+        "CNAME": [
+          "redirect.github.com."
+        ],
+        "MX": [
+          "redirect.github.com."
+        ],
+        "TXT": [
+          "redirect.github.com."
+        ],
+        "SOA": [
+          "redirect.github.com."
+        ]
+      },
+      "shop.github.com": {
+        "A": [
+          "github.com.",
+          "20.26.156.215"
+        ],
+        "AAAA": [
+          "github.com."
+        ],
+        "CNAME": [
+          "github.com."
+        ],
+        "MX": [
+          "github.com.",
+          "5 alt1.aspmx.l.google.com.",
+          "1 aspmx.l.google.com.",
+          "10 alt4.aspmx.l.google.com.",
+          "10 alt3.aspmx.l.google.com.",
+          "5 alt2.aspmx.l.google.com."
+        ],
+        "NS": [
+          "github.com.",
+          "dns3.p08.nsone.net.",
+          "dns4.p08.nsone.net.",
+          "ns-1283.awsdns-32.org.",
+          "ns-1707.awsdns-21.co.uk.",
+          "ns-421.awsdns-52.com.",
+          "ns-520.awsdns-01.net.",
+          "dns1.p08.nsone.net.",
+          "dns2.p08.nsone.net."
+        ],
+        "TXT": [
+          "github.com.",
+          "\"loom-site-verification=f3787154f1154b7880e720a511ea664d\"",
+          "\"miro-verification=d2e174fdb00c71e0bcf58f8e58c3da2dd80dcfa9\"",
+          "\"shopify-verification-code=t1YPwcmvnxZyBycaCpk1MPyWoFs72o\"",
+          "\"stripe-verification=f88ef17321660a01bab1660454192e014defa29ba7b8de9633c69d6b4912217f\"",
+          "\"v=spf1 ip4:192.30.252.0/22 include:_netblocks.google.com include:_netblocks2.google.com include:_netblocks3.google.com include:spf.protection.outlook.com include:mail.zendesk.com include:_spf.salesforce.com include:servers.mcsv.net include:mktomail.com ip\" \"4:62.253.227.114 ip4:166.78.69.169 ip4:166.78.69.170 ip4:166.78.71.131 ip4:167.89.101.2 ip4:167.89.101.192/28 ip4:192.254.112.60 ip4:192.254.112.98/31 ip4:192.254.113.10 ip4:192.254.113.101 ip4:192.254.114.176  ~all\"",
+          "\"MS=6BF03E6AF5CB689E315FB6199603BABF2C88D805\"",
+          "\"MS=ms44452932\"",
+          "\"MS=ms58704441\"",
+          "\"adobe-idp-site-verification=b92c9e999aef825edc36e0a3d847d2dbad5b2fc0e05c79ddd7a16139b48ecf4b\"",
+          "\"apple-domain-verification=RyQhdzTl6Z6x8ZP4\"",
+          "\"atlassian-domain-verification=jjgw98AKv2aeoYFxiL/VFaoyPkn3undEssTRuMg6C/3Fp/iqhkV4HVV7WjYlVeF8\"",
+          "\"calendly-site-verification=at0DQARi7IZvJtXQAWhMqpmIzpvoBNF7aam5VKKxP\"",
+          "\"docusign=087098e3-3d46-47b7-9b4e-8a23028154cd\"",
+          "\"facebook-domain-verification=39xu4jzl7roi7x0n93ldkxjiaarx50\"",
+          "\"google-site-verification=82Le34Flgtd15ojYhHlGF_6g72muSjamlMVThBOJpks\"",
+          "\"google-site-verification=UTM-3akMgubp6tQtgEuAkYNYLyYAvpTnnSrDMWoDR3o\"",
+          "\"jamf-site-verification=XtaPNIYghF_e_xRDI8CjgQ\"",
+          "\"krisp-domain-verification=ZlyiK7XLhnaoUQb2hpak1PLY7dFkl1WE\""
+        ],
+        "SOA": [
+          "github.com.",
+          "ns-1707.awsdns-21.co.uk. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"
+        ]
+      },
+      "support.github.com": {
+        "A": [
+          "185.199.109.133",
+          "185.199.108.133",
+          "185.199.111.133",
+          "185.199.110.133"
+        ],
+        "MX": [
+          "10 alt4.aspmx.l.google.com.",
+          "5 alt2.aspmx.l.google.com.",
+          "5 alt1.aspmx.l.google.com.",
+          "1 aspmx.l.google.com.",
+          "10 alt3.aspmx.l.google.com."
+        ],
+        "TXT": [
+          "\"v=spf1 include:_spf.google.com ~all\""
+        ]
+      },
+      "test.github.com": {
+        "A": [
+          "192.0.2.1"
+        ],
+        "MX": [
+          "10 alt4.aspmx.l.google.com.",
+          "5 alt1.aspmx.l.google.com.",
+          "5 alt2.aspmx.l.google.com.",
+          "1 aspmx.l.google.com.",
+          "10 alt3.aspmx.l.google.com."
+        ],
+        "TXT": [
+          "\"v=spf1 include:_spf.google.com ~all\""
+        ]
+      },
+      "www.github.com": {
+        "A": [
+          "github.com.",
+          "20.26.156.215"
+        ],
+        "AAAA": [
+          "github.com."
+        ],
+        "CNAME": [
+          "github.com."
+        ],
+        "MX": [
+          "github.com.",
+          "1 aspmx.l.google.com.",
+          "5 alt2.aspmx.l.google.com.",
+          "5 alt1.aspmx.l.google.com.",
+          "10 alt4.aspmx.l.google.com.",
+          "10 alt3.aspmx.l.google.com."
+        ],
+        "NS": [
+          "github.com.",
+          "ns-1283.awsdns-32.org.",
+          "ns-1707.awsdns-21.co.uk.",
+          "ns-421.awsdns-52.com.",
+          "ns-520.awsdns-01.net.",
+          "dns1.p08.nsone.net.",
+          "dns2.p08.nsone.net.",
+          "dns3.p08.nsone.net.",
+          "dns4.p08.nsone.net."
+        ],
+        "TXT": [
+          "github.com.",
+          "\"stripe-verification=f88ef17321660a01bab1660454192e014defa29ba7b8de9633c69d6b4912217f\"",
+          "\"v=spf1 ip4:192.30.252.0/22 include:_netblocks.google.com include:_netblocks2.google.com include:_netblocks3.google.com include:spf.protection.outlook.com include:mail.zendesk.com include:_spf.salesforce.com include:servers.mcsv.net include:mktomail.com ip\" \"4:62.253.227.114 ip4:166.78.69.169 ip4:166.78.69.170 ip4:166.78.71.131 ip4:167.89.101.2 ip4:167.89.101.192/28 ip4:192.254.112.60 ip4:192.254.112.98/31 ip4:192.254.113.10 ip4:192.254.113.101 ip4:192.254.114.176  ~all\"",
+          "\"MS=6BF03E6AF5CB689E315FB6199603BABF2C88D805\"",
+          "\"MS=ms44452932\"",
+          "\"MS=ms58704441\"",
+          "\"adobe-idp-site-verification=b92c9e999aef825edc36e0a3d847d2dbad5b2fc0e05c79ddd7a16139b48ecf4b\"",
+          "\"apple-domain-verification=RyQhdzTl6Z6x8ZP4\"",
+          "\"atlassian-domain-verification=jjgw98AKv2aeoYFxiL/VFaoyPkn3undEssTRuMg6C/3Fp/iqhkV4HVV7WjYlVeF8\"",
+          "\"calendly-site-verification=at0DQARi7IZvJtXQAWhMqpmIzpvoBNF7aam5VKKxP\"",
+          "\"docusign=087098e3-3d46-47b7-9b4e-8a23028154cd\"",
+          "\"facebook-domain-verification=39xu4jzl7roi7x0n93ldkxjiaarx50\"",
+          "\"google-site-verification=82Le34Flgtd15ojYhHlGF_6g72muSjamlMVThBOJpks\"",
+          "\"google-site-verification=UTM-3akMgubp6tQtgEuAkYNYLyYAvpTnnSrDMWoDR3o\"",
+          "\"jamf-site-verification=XtaPNIYghF_e_xRDI8CjgQ\"",
+          "\"krisp-domain-verification=ZlyiK7XLhnaoUQb2hpak1PLY7dFkl1WE\"",
+          "\"loom-site-verification=f3787154f1154b7880e720a511ea664d\"",
+          "\"miro-verification=d2e174fdb00c71e0bcf58f8e58c3da2dd80dcfa9\"",
+          "\"shopify-verification-code=t1YPwcmvnxZyBycaCpk1MPyWoFs72o\""
+        ],
+        "SOA": [
+          "github.com.",
+          "dns1.p08.nsone.net. hostmaster.nsone.net. 1656468023 43200 7200 1209600 3600"
+        ]
+      }
+    },
+    "zone_transfer": {
+      "possible": false,
+      "name_servers": [
+        "ns-421.awsdns-52.com",
+        "ns-520.awsdns-01.net",
+        "dns1.p08.nsone.net",
+        "dns2.p08.nsone.net",
+        "dns3.p08.nsone.net",
+        "dns4.p08.nsone.net",
+        "ns-1283.awsdns-32.org",
+        "ns-1707.awsdns-21.co.uk"
+      ],
+      "records": [],
+      "error": ""
+    },
+    "mx_records_detail": [
+      {
+        "priority": 1,
+        "hostname": "aspmx.l.google.com",
+        "ip_addresses": [
+          "142.251.173.27",
+          "2a00:1450:400c:c0c::1b"
+        ]
+      },
+      {
+        "priority": 5,
+        "hostname": "alt1.aspmx.l.google.com",
+        "ip_addresses": [
+          "192.178.156.26",
+          "2a00:1450:4013:c1c::1b"
+        ]
+      },
+      {
+        "priority": 5,
+        "hostname": "alt2.aspmx.l.google.com",
+        "ip_addresses": [
+          "142.250.147.27",
+          "2a00:1450:4025:c01::1b"
+        ]
+      },
+      {
+        "priority": 10,
+        "hostname": "alt3.aspmx.l.google.com",
+        "ip_addresses": [
+          "74.125.131.26",
+          "2a00:1450:4010:c0e::1a"
+        ]
+      },
+      {
+        "priority": 10,
+        "hostname": "alt4.aspmx.l.google.com",
+        "ip_addresses": [
+          "142.250.4.27",
+          "2404:6800:4003:c06::1b"
+        ]
+      }
+    ]
+  },
+  "duration": 20.26906442642212,
+  "error": null,
+  "metadata": {
+    "scanner": "BRS-RECON",
+    "version": "0.0.1",
+    "saved_at": "2025-09-07T19:37:35.117547"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "BRS-RECON",
+          "version": "0.0.1",
+          "informationUri": "https://t.me/EasyProTech"
+        }
+      },
+      "results": [],
+      "invocations": [
+        {
+          "startTimeUtc": "2025-09-07T19:57:09.965014Z",
+          "endTimeUtc": "2025-09-07T19:57:09.965027Z",
+          "executionSuccessful": true
+        }
+      ]
+    }
+  ]
+}

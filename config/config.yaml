@@ -1,0 +1,32 @@
+logging:
+  console_output: true
+  log_file_backup_count: 5
+  log_file_max_size: 10MB
+  log_level: INFO
+  log_to_file: true
+network:
+  default_ports: 22,80,443,8080,8443
+  default_timeout: 30
+  dns_servers:
+  - 8.8.8.8
+  - 1.1.1.1
+  max_concurrent_scans: 10
+  ping_timeout: 3
+output:
+  auto_cleanup_days: 30
+  default_format: json
+  results_dir: results
+  save_raw_output: true
+  timestamp_format: '%Y%m%d-%H%M%S'
+security:
+  authorized_targets_only: true
+  max_scan_depth: 3
+  rate_limit_delay: 0.1
+  respect_robots_txt: true
+  safe_mode: true
+web:
+  custom_headers: {}
+  max_redirects: 5
+  request_timeout: 15
+  user_agent: BRS-RECON/0.0.1
+  verify_ssl: false
