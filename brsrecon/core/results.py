@@ -63,6 +63,7 @@ class ResultsManager:
         elif format_type.lower() == "html":
             # Delegate to ExportManager for HTML to align with tests
             from .export import ExportManager
+
             exp = ExportManager(self.results_dir)
             files = exp.export_result(result, ["html"])
             return files["html"]
@@ -228,12 +229,15 @@ class ResultsManager:
                 ts_str = name.split("_", 1)[0]
                 # Parse ISO-like, fallback to mtime if fails
                 from datetime import datetime
+
                 return datetime.fromisoformat(ts_str.replace("Z", "+00:00")).timestamp()
             except Exception:
                 return 0.0
 
         # Sort by timestamp embedded in filename, newest first
-        sorted_files = sorted(filtered_files, key=lambda x: parse_ts_from_name(x.name), reverse=True)
+        sorted_files = sorted(
+            filtered_files, key=lambda x: parse_ts_from_name(x.name), reverse=True
+        )
 
         # Return parsed JSON entries with timestamp for tests
         results: List[Dict[str, Any]] = []
@@ -273,7 +277,9 @@ class ResultsManager:
 
     def cleanup_old_results(self, keep_count: int = 100) -> int:
         scan_dir = self._results_path / "scans"
-        files = sorted(scan_dir.glob("*.json"), key=lambda x: x.stat().st_mtime, reverse=True)
+        files = sorted(
+            scan_dir.glob("*.json"), key=lambda x: x.stat().st_mtime, reverse=True
+        )
         to_delete = files[keep_count:]
         deleted = 0
         for f in to_delete:

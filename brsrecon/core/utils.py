@@ -295,7 +295,9 @@ def _nmap_parse_xml_output(text: str) -> Dict[str, Any]:
             state = state_el.get("state") if state_el is not None else "unknown"
             service_el = p.find("service")
             service_name = service_el.get("name") if service_el is not None else ""
-            ports_list.append({"port": port_no, "state": state, "service": service_name})
+            ports_list.append(
+                {"port": port_no, "state": state, "service": service_name}
+            )
         hosts.append({"address": address, "hostname": hostname, "ports": ports_list})
     return {"hosts": hosts}
 

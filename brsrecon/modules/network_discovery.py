@@ -100,7 +100,9 @@ class NetworkDiscovery(NetworkModule):
             result = run_command(cmd, timeout=60)
             if result["success"]:
                 live_hosts = [
-                    line.strip() for line in result["stdout"].splitlines() if line.strip()
+                    line.strip()
+                    for line in result["stdout"].splitlines()
+                    if line.strip()
                 ]
             else:
                 self.logger.debug(f"fping failed: {result['stderr']}")

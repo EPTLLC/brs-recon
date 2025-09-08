@@ -12,15 +12,15 @@ __author__ = "brabus"
 __license__ = "GPLv3"
 __copyright__ = "Copyright 2025 EasyProTech LLC"
 
+# Test-only global shims for legacy tests
+import os
+import sys
+
 # Import main components for easy access
 from .core.config import BRSConfig, get_config, load_config_from_file
 from .core.logger import get_logger
 from .core.results import ResultsManager
 from .main import main
-
-# Test-only global shims for legacy tests
-import os
-import sys
 
 _enable_test_shims = (
     os.getenv("BRS_RECON_TEST_SHIMS", "").lower() in ("1", "true", "yes")
