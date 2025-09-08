@@ -48,24 +48,24 @@ jobs:
         pip install -e .[dev]
         
     - name: Run Black formatter check
-      run: black --check --diff brs-recon/
+      run: black --check --diff brsrecon/
       
     - name: Run isort import sorting check
-      run: isort --check-only --diff brs-recon/
+      run: isort --check-only --diff brsrecon/
       
     - name: Run flake8 linting
-      run: flake8 brs-recon/
+      run: flake8 brsrecon/
       
     - name: Run mypy type checking
-      run: mypy brs-recon/
+      run: mypy brsrecon/
       continue-on-error: true  # Type checking is advisory for now
       
     - name: Run bandit security linting
-      run: bandit -r brs-recon/ -f json -o bandit-report.json
+      run: bandit -r brsrecon/ -f json -o bandit-report.json
       continue-on-error: true
       
     - name: Upload bandit results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: bandit-report
@@ -107,11 +107,11 @@ jobs:
         
     - name: Run unit tests
       run: |
-        pytest tests/unit/ -v --cov=brs_recon --cov-report=xml --cov-report=html
+        pytest tests/unit/ -v --cov=brsrecon --cov-report=xml --cov-report=html
         
     - name: Run integration tests (non-privileged)
       run: |
-        pytest tests/integration/ -v -m "not privileged" --cov-append --cov=brs_recon --cov-report=xml
+        pytest tests/integration/ -v -m "not privileged" --cov-append --cov=brsrecon --cov-report=xml
       continue-on-error: true  # Integration tests may fail in CI environment
       
     - name: Upload coverage to Codecov
@@ -123,7 +123,7 @@ jobs:
         name: codecov-umbrella
         
     - name: Upload test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-results-py${{ matrix.python-version }}
@@ -163,7 +163,7 @@ jobs:
       uses: github/codeql-action/analyze@v2
       
     - name: Upload security reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: security-reports
@@ -236,7 +236,7 @@ jobs:
       run: twine check dist/*
       
     - name: Upload distribution artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: python-distribution
         path: dist/
@@ -252,7 +252,7 @@ jobs:
       uses: actions/checkout@v4
       
     - name: Download distribution artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: python-distribution
         path: dist/

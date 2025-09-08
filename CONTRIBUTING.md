@@ -49,7 +49,7 @@ git clone https://github.com/EPTLLC/brs-recon.git
 cd brs-recon
 
 # Set up virtual environment
-python3 -m venv .venv
+python -m venv .venv
 source .venv/bin/activate
 
 # Install development dependencies
@@ -70,7 +70,7 @@ pytest tests/unit/ -v
    ```bash
    # Ubuntu/Debian
    sudo apt update
-   sudo apt install -y python3 python3-pip python3-venv git
+   sudo apt install -y python python-pip python-venv git
    sudo apt install -y nmap fping arp-scan masscan dig whois
    sudo apt install -y nikto sslscan sqlmap dirb
    
@@ -82,7 +82,7 @@ pytest tests/unit/ -v
 2. **Python Environment**
    ```bash
    # Create virtual environment
-   python3 -m venv .venv
+   python -m venv .venv
    source .venv/bin/activate
    
    # Upgrade pip and install build tools

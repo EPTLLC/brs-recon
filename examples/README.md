@@ -71,7 +71,7 @@ Configuration schema for mapping BRS-RECON results to SARIF format:
 
 ```bash
 # Validate JSON output against schema
-python3 -c "
+python -c "
 import json
 import jsonschema
 
@@ -88,7 +88,7 @@ print('✅ JSON validation passed!')
 "
 
 # Validate SARIF output
-python3 -c "
+python -c "
 import json
 
 # Load and validate SARIF structure
@@ -178,8 +178,8 @@ print(report)
 ```yaml
 - name: Run BRS-RECON Security Scan
   run: |
-    python3 -m brs-recon vuln ${{ matrix.target }} --scan-type comprehensive
-    python3 -m brs-recon export results/scans/latest.json --formats sarif
+    brs-recon vuln ${{ matrix.target }} --scan-type comprehensive
+    brs-recon export results/scans/latest.json --formats sarif
 
 - name: Upload SARIF to GitHub Security
   uses: github/codeql-action/upload-sarif@v2
@@ -196,12 +196,12 @@ print(report)
 set -e
 
 # Run comprehensive security assessment
-python3 -m brs-recon vuln "${TARGET_HOST}" \
+brs-recon vuln "${TARGET_HOST}" \
     --scan-type comprehensive \
     --export-formats json sarif html
 
 # Validate results
-python3 -c "
+python -c "
 import json
 import sys
 

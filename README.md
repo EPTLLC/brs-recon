@@ -58,7 +58,7 @@ sudo setcap cap_net_admin,cap_net_raw+ep "$(command -v masscan)"
 ### Install Python Dependencies
 
 ```bash
-pip3 install -r requirements/requirements.txt
+pip install -r requirements/requirements.txt
 ```
 
 ### Quick Scans
@@ -151,9 +151,9 @@ Service Detection:
 
 ```bash
 # Examples  
-python3 -m brs-recon ports target.com --ports top1000 --scan-type comprehensive
-python3 -m brs-recon ports 10.0.0.1 --ports "80,443,8080-8090" --service-detection
-python3 -m brs-recon ports target.com --scan-type syn --ports all
+brs-recon ports target.com --ports top1000 --scan-type comprehensive
+brs-recon ports 10.0.0.1 --ports "80,443,8080-8090" --service-detection
+brs-recon ports target.com --scan-type syn --ports all
 ```
 
 ### 3. Domain Reconnaissance
@@ -174,9 +174,9 @@ Intelligence Gathering:
 
 ```bash
 # Examples
-python3 -m brs-recon domain example.com --scan-type comprehensive --threads 50
-python3 -m brs-recon domain target.com --scan-type basic --no-subdomains
-python3 -m brs-recon domain international-域名.com --scan-type comprehensive
+brs-recon domain example.com --scan-type comprehensive --threads 50
+brs-recon domain target.com --scan-type basic --no-subdomains
+brs-recon domain international-域名.com --scan-type comprehensive
 ```
 
 ### 4. Vulnerability Assessment
@@ -197,9 +197,9 @@ Performance Features:
 
 ```bash
 # Examples
-python3 -m brs-recon vuln target.com --scan-type comprehensive --aggressive
-python3 -m brs-recon vuln https://app.example.com --scan-type web_only
-python3 -m brs-recon vuln target.com --no-web --scan-type basic
+brs-recon vuln target.com --scan-type comprehensive --aggressive
+brs-recon vuln https://app.example.com --scan-type web_only
+brs-recon vuln target.com --no-web --scan-type basic
 ```
 
 ### 5. System Information
@@ -221,9 +221,9 @@ Advanced Features:
 
 ```bash
 # Examples
-python3 -m brs-recon system --scan-type full --processes
-python3 -m brs-recon system --scan-type basic --no-network
-python3 -m brs-recon system --target remote-host --scan-type full
+brs-recon system --scan-type full --processes
+brs-recon system --scan-type basic --no-network
+brs-recon system --target remote-host --scan-type full
 ```
 
 ---
@@ -245,10 +245,10 @@ BRS-RECON provides comprehensive export capabilities matching enterprise securit
 
 ```bash
 # Export existing scan results
-python3 -m brs-recon export results/scans/scan_result.json --formats html sarif csv
+brs-recon export results/scans/scan_result.json --formats html sarif csv
 
 # Direct export during scanning (future feature)
-python3 -m brs-recon vuln target.com --export-formats html sarif
+brs-recon vuln target.com --export-formats html sarif
 ```
 
 ### Results Directory Structure (Contract)
@@ -337,29 +337,29 @@ export BRS_RECON_SAFE_MODE=true
 ulimit -n 65535
 
 # Phase 1: Network Discovery
-python3 -m brs-recon network 10.0.0.0/24 --method comprehensive --threads 100 --max-hosts 2048
+brs-recon network 10.0.0.0/24 --method comprehensive --threads 100 --max-hosts 2048
 
 # Phase 2: Port Scanning (discovered hosts)
-python3 -m brs-recon ports discovered-host.com --ports top1000 --service-detection --max-ports 5000
+brs-recon ports discovered-host.com --ports top1000 --service-detection --max-ports 5000
 
 # Phase 3: Vulnerability Assessment
-python3 -m brs-recon vuln discovered-host.com --scan-type comprehensive --aggressive
+brs-recon vuln discovered-host.com --scan-type comprehensive --aggressive
 
 # Phase 4: Export Results
-python3 -m brs-recon export results/scans/latest-vuln-scan.json --formats html sarif
+brs-recon export results/scans/latest-vuln-scan.json --formats html sarif
 ```
 
 ### Domain Intelligence Pipeline
 
 ```bash
 # Comprehensive domain analysis
-python3 -m brs-recon domain target.com --scan-type comprehensive --threads 64
+brs-recon domain target.com --scan-type comprehensive --threads 64
 
 # Subdomain discovery only
-python3 -m brs-recon domain target.com --scan-type basic --subdomains
+brs-recon domain target.com --scan-type basic --subdomains
 
 # Export for further analysis
-python3 -m brs-recon export results/scans/domain-scan.json --formats csv xml
+brs-recon export results/scans/domain-scan.json --formats csv xml
 ```
 
 ### CI/CD Integration
@@ -368,8 +368,8 @@ python3 -m brs-recon export results/scans/domain-scan.json --formats csv xml
 # GitHub Actions example
 - name: Security Reconnaissance
   run: |
-    python3 -m brs-recon vuln $(cat inputs/targets.txt) --scan-type basic
-    python3 -m brs-recon export results/scans/latest.json --formats sarif
+    brs-recon vuln $(cat inputs/targets.txt) --scan-type basic
+    brs-recon export results/scans/latest.json --formats sarif
 
 - name: Upload Security Results
   uses: github/codeql-action/upload-sarif@v2
@@ -438,87 +438,87 @@ docker pull ghcr.io/eptllc/brs-recon:latest
 
 ```bash
 # Basic ping sweep
-python3 -m brs-recon network 192.168.1.0/24
+brs-recon network 192.168.1.0/24
 
 # ARP scan local network
-python3 -m brs-recon network 192.168.1.0/24 --method arp_scan
+brs-recon network 192.168.1.0/24 --method arp_scan
 
 # Comprehensive multi-method discovery
-python3 -m brs-recon network 10.0.0.0/16 --method comprehensive --threads 200
+brs-recon network 10.0.0.0/16 --method comprehensive --threads 200
 
 # IPv6 network discovery
-python3 -m brs-recon network 2001:db8::/64 --method nmap_discovery
+brs-recon network 2001:db8::/64 --method nmap_discovery
 ```
 
 ### Port Scanning
 
 ```bash
 # Common ports with service detection
-python3 -m brs-recon ports target.com --ports common --service-detection
+brs-recon ports target.com --ports common --service-detection
 
 # Top 1000 ports comprehensive scan
-python3 -m brs-recon ports target.com --ports top1000 --scan-type comprehensive
+brs-recon ports target.com --ports top1000 --scan-type comprehensive
 
 # Custom port range
-python3 -m brs-recon ports target.com --ports "80,443,8000-8100" --scan-type tcp
+brs-recon ports target.com --ports "80,443,8000-8100" --scan-type tcp
 
 # UDP scan
-python3 -m brs-recon ports target.com --ports "53,161,1194" --scan-type udp
+brs-recon ports target.com --ports "53,161,1194" --scan-type udp
 ```
 
 ### Domain Reconnaissance
 
 ```bash
 # Basic domain analysis
-python3 -m brs-recon domain example.com --scan-type basic
+brs-recon domain example.com --scan-type basic
 
 # Comprehensive with subdomain enumeration
-python3 -m brs-recon domain target.com --scan-type comprehensive --threads 50
+brs-recon domain target.com --scan-type comprehensive --threads 50
 
 # International domains
-python3 -m brs-recon domain münchen.de --scan-type comprehensive
+brs-recon domain münchen.de --scan-type comprehensive
 ```
 
 ### Vulnerability Assessment
 
 ```bash
 # Basic security assessment
-python3 -m brs-recon vuln target.com --scan-type basic
+brs-recon vuln target.com --scan-type basic
 
 # Comprehensive web application testing
-python3 -m brs-recon vuln https://app.target.com --scan-type comprehensive --aggressive
+brs-recon vuln https://app.target.com --scan-type comprehensive --aggressive
 
 # Network vulnerabilities only
-python3 -m brs-recon vuln target.com --no-web --no-ssl
+brs-recon vuln target.com --no-web --no-ssl
 
 # Web vulnerabilities only
-python3 -m brs-recon vuln target.com --scan-type web_only --aggressive
+brs-recon vuln target.com --scan-type web_only --aggressive
 ```
 
 ### System Information
 
 ```bash
 # Basic system profile
-python3 -m brs-recon system --scan-type basic
+brs-recon system --scan-type basic
 
 # Comprehensive system analysis
-python3 -m brs-recon system --scan-type full --processes
+brs-recon system --scan-type full --processes
 
 # Network-focused analysis
-python3 -m brs-recon system --scan-type full --no-hardware
+brs-recon system --scan-type full --no-hardware
 ```
 
 ### Export and Reporting
 
 ```bash
 # Export to multiple formats
-python3 -m brs-recon export results/scans/scan-result.json --formats html sarif csv xml
+brs-recon export results/scans/scan-result.json --formats html sarif csv xml
 
 # HTML report only
-python3 -m brs-recon export results/scans/scan-result.json --formats html
+brs-recon export results/scans/scan-result.json --formats html
 
 # SARIF for security tools
-python3 -m brs-recon export results/scans/vuln-scan.json --formats sarif
+brs-recon export results/scans/vuln-scan.json --formats sarif
 ```
 
 ---
@@ -638,14 +638,14 @@ See [LEGAL.md](LEGAL.md) and [DISCLAIMER.md](DISCLAIMER.md) for complete terms.
 # Development setup
 git clone https://github.com/EPTLLC/brs-recon.git
 cd brs-recon
-pip3 install -r requirements/requirements.txt
+pip install -r requirements/requirements.txt
 
 # Run tests
-python3 -m pytest tests/
+pytest tests/
 
 # Code formatting
-black brs-recon/
-flake8 brs-recon/
+black brsrecon/
+flake8 brsrecon/
 
 # Submit changes
 git checkout -b feature/amazing-enhancement
@@ -668,7 +668,7 @@ sudo setcap cap_net_admin,cap_net_raw+ep "$(command -v masscan)"
 **Missing Tools:**
 ```bash
 # Check tool availability
-python3 -m brs-recon vuln target.com --scan-type basic
+brs-recon vuln target.com --scan-type basic
 # Install missing tools based on error messages
 ```
 
@@ -680,7 +680,7 @@ python3 -m brs-recon vuln target.com --scan-type basic
 ### Debug Mode
 
 ```bash
-python3 -m brs-recon --log-level DEBUG network target.com
+brs-recon --log-level DEBUG network target.com
 ```
 
 ---
