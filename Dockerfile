@@ -47,16 +47,15 @@ COPY requirements/requirements-base.txt /tmp/requirements-base.txt
 COPY requirements/constraints.txt /tmp/constraints.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
-# Install testssl.sh with required etc resources
+# Install testssl.sh with required etc resources (clone repo to ensure path correctness)
 ENV TESTSSL_INSTALL_DIR=/usr/local/bin
 RUN wget -q --progress=dot:giga https://testssl.sh/testssl.sh -O /usr/local/bin/testssl.sh && \
     chmod +x /usr/local/bin/testssl.sh && \
     mkdir -p /usr/local/bin/etc && \
-    wget -q https://github.com/drwetter/testssl.sh/archive/refs/heads/master.zip -O /tmp/testssl.zip && \
-    apt-get update && apt-get install -y --no-install-recommends unzip && \
-    unzip -q /tmp/testssl.zip -d /tmp && \
-    cp -r /tmp/testssl.sh-master/etc/* /usr/local/bin/etc/ && \
-    rm -rf /var/lib/apt/lists/* /tmp/testssl* && \
+    apt-get update && apt-get install -y --no-install-recommends git && \
+    git clone --depth 1 https://github.com/drwetter/testssl.sh.git /tmp/testssl && \
+    cp -r /tmp/testssl/etc/* /usr/local/bin/etc/ && \
+    rm -rf /var/lib/apt/lists/* /tmp/testssl && \
     /usr/local/bin/testssl.sh --version
 
 # Copy and install application
@@ -95,6 +94,7 @@ ENV LANG=C.UTF-8
 ENV BRS_RESULTS_DIR=/results
 ENV BRS_CONFIG_DIR=/config
 ENV PATH="/opt/venv/bin:$PATH"
+ENV TESTSSL_INSTALL_DIR=/usr/local/bin
 
 # Install runtime dependencies only
 RUN apt-get update && apt-get install -y --no-install-recommends \
