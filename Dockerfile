@@ -47,11 +47,16 @@ COPY requirements/requirements-base.txt /tmp/requirements-base.txt
 COPY requirements/constraints.txt /tmp/constraints.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
-# Install testssl.sh
-RUN wget -q --progress=dot:giga \
-    https://testssl.sh/testssl.sh \
-    -O /usr/local/bin/testssl.sh && \
+# Install testssl.sh with required etc resources
+ENV TESTSSL_INSTALL_DIR=/usr/local/bin
+RUN wget -q --progress=dot:giga https://testssl.sh/testssl.sh -O /usr/local/bin/testssl.sh && \
     chmod +x /usr/local/bin/testssl.sh && \
+    mkdir -p /usr/local/bin/etc && \
+    wget -q https://github.com/drwetter/testssl.sh/archive/refs/heads/master.zip -O /tmp/testssl.zip && \
+    apt-get update && apt-get install -y --no-install-recommends unzip && \
+    unzip -q /tmp/testssl.zip -d /tmp && \
+    cp -r /tmp/testssl.sh-master/etc/* /usr/local/bin/etc/ && \
+    rm -rf /var/lib/apt/lists/* /tmp/testssl* && \
     /usr/local/bin/testssl.sh --version
 
 # Copy and install application
@@ -126,6 +131,7 @@ COPY --from=builder /opt/venv /opt/venv
 
 # Copy testssl.sh from builder
 COPY --from=builder /usr/local/bin/testssl.sh /usr/local/bin/testssl.sh
+COPY --from=builder /usr/local/bin/etc /usr/local/bin/etc
 
 # Copy application from builder
 COPY --from=builder /app /app
