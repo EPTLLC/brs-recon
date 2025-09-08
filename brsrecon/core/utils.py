@@ -209,6 +209,7 @@ def run_command(
 def check_tool_availability(tool: str) -> bool:
     """Check if external tool is available"""
     import shutil
+
     return shutil.which(tool) is not None
 
 
