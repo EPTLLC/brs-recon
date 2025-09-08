@@ -42,6 +42,8 @@ RUN pip install --upgrade pip setuptools wheel
 
 # Copy requirements and install Python dependencies
 COPY requirements/requirements.txt /tmp/requirements.txt
+COPY requirements/requirements-base.txt /tmp/requirements-base.txt
+COPY requirements/constraints.txt /tmp/constraints.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Install testssl.sh
