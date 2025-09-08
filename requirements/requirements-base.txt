@@ -1,0 +1,32 @@
+# BRS-RECON Base Dependencies
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: 2025-09-07
+# Status: Created
+# Telegram: https://t.me/easyprotech
+
+# Core framework dependencies
+typer[all]==0.9.0
+rich==13.7.0
+pydantic==2.5.2
+PyYAML==6.0.1
+python-dotenv==1.0.0
+
+# Network and security libraries
+python-nmap==0.7.1
+scapy==2.5.0
+requests==2.32.4
+# Python 3.8 wheels are not available for aiohttp 3.12.15. Use an environment marker compatible approach in pyproject,
+# and keep a broadly compatible baseline here to avoid resolver failures on 3.8 runners.
+aiohttp==3.11.11
+asyncio-mqtt==0.13.0
+
+# Data processing and templating
+pandas==2.1.4
+jinja2==3.1.6
+
+# System and utility libraries
+psutil==5.9.6
+ipaddress==1.0.23; python_version < "3.3"
+pathlib2==2.3.7; python_version < "3.4"

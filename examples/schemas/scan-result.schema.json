@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/EPTLLC/brs-recon/schemas/scan-result.schema.json",
+  "title": "BRS-RECON Scan Result Schema",
+  "description": "JSON Schema for BRS-RECON scan results validation",
+  "type": "object",
+  "required": [
+    "scan_id",
+    "module",
+    "target",
+    "scan_type", 
+    "status",
+    "start_time",
+    "results",
+    "metadata"
+  ],
+  "properties": {
+    "scan_id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "description": "Unique identifier for the scan"
+    },
+    "module": {
+      "type": "string",
+      "enum": [
+        "network_discovery",
+        "port_scanning", 
+        "domain_reconnaissance",
+        "vulnerability_scanner",
+        "system_information"
+      ],
+      "description": "Module that performed the scan"
+    },
+    "target": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Target that was scanned"
+    },
+    "scan_type": {
+      "type": "string",
+      "enum": ["basic", "comprehensive", "aggressive", "stealth", "custom"],
+      "description": "Type of scan performed"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["running", "completed", "failed", "cancelled"],
+      "description": "Current status of the scan"
+    },
+    "start_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when scan started"
+    },
+    "end_time": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when scan ended"
+    },
+    "duration": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Scan duration in seconds"
+    },
+    "results": {
+      "type": "object",
+      "description": "Module-specific scan results"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["version"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "BRS-RECON version used"
+        },
+        "scan_options": {
+          "type": "object",
+          "description": "Scan configuration options"
+        },
+        "environment": {
+          "type": "object",
+          "properties": {
+            "python_version": {"type": "string"},
+            "platform": {"type": "string"},
+            "hostname": {"type": "string"}
+          }
+        }
+      }
+    },
+    "error_message": {
+      "type": ["string", "null"],
+      "description": "Error message if scan failed"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Non-fatal warnings during scan"
+    }
+  },
+  "additionalProperties": false
+}

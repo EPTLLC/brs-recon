@@ -1,0 +1,64 @@
+# BRS-RECON DUAL LICENSE
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: 2025-09-07
+# Status: Modified
+# Telegram: https://t.me/easyprotech
+
+BRS-RECON DUAL LICENSE STRUCTURE
+
+Copyright (c) 2025 EasyProTech LLC
+Contact: https://t.me/easyprotech
+
+================================================================================
+DUAL LICENSE OPTIONS
+================================================================================
+
+This software is available under two license options. Choose the license that 
+best fits your use case:
+
+1. GPL-3.0-or-later (Open Source) - See LICENSE-GPL3
+2. Commercial License - See LICENSE-COMMERCIAL
+
+SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
+
+================================================================================
+LICENSE SELECTION GUIDE
+================================================================================
+
+CHOOSE GPL-3.0 IF:
+- Educational or research use
+- Open source project development
+- Non-commercial applications
+- You can comply with copyleft requirements
+
+CHOOSE COMMERCIAL LICENSE IF:
+- Commercial product development
+- Proprietary software integration
+- Cannot disclose source code
+- Need commercial support
+
+================================================================================
+AUTHORIZATION NOTICE
+================================================================================
+
+This tool is designed for authorized security testing only. Users must:
+- Obtain explicit permission before testing any systems
+- Comply with applicable laws and regulations
+- Follow ethical hacking guidelines
+- Use only for legitimate security purposes
+
+Unauthorized use may result in criminal prosecution under computer crime laws.
+
+================================================================================
+DISCLAIMER
+================================================================================
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+For detailed license terms, see:
+- LICENSE-GPL3 for GPL version 3 terms
+- LICENSE-COMMERCIAL for commercial license terms

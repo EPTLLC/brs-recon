@@ -1,0 +1,148 @@
+# BRS-RECON Project Configuration
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: 2025-09-16 (UTC)
+# Status: Modified
+# Telegram: https://t.me/easyprotech
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "brs-recon"
+version = "0.0.1"
+description = "Python Network Reconnaissance Toolkit - Modular, async, enterprise-grade security assessment tool"
+readme = "README.md"
+license = {text = "GPL-3.0-or-later OR Commercial"}
+authors = [
+    {name = "Brabus", email = "mail.easypro.tech@gmail.com"},
+]
+maintainers = [
+    {name = "EasyProTech LLC", email = "mail.easypro.tech@gmail.com"},
+]
+keywords = [
+    "security",
+    "reconnaissance",
+    "network-scanning", 
+    "vulnerability-assessment",
+    "penetration-testing",
+    "cybersecurity",
+    "nmap",
+    "sarif"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: System :: Networking",
+    "Topic :: System :: Systems Administration",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+    "PyYAML>=6.0",
+    "python-dotenv>=1.0.0",
+    "python-nmap>=0.7.1",
+    "scapy>=2.5.0",
+    "psutil>=5.9.0",
+    "requests>=2.32.4",
+    # aiohttp 3.12.x is not available for Python 3.8 on PyPI. Provide a compatible pin via markers.
+    "aiohttp>=3.12.14; python_version >= '3.9'",
+    "aiohttp>=3.8.1,<3.12.0; python_version < '3.9'",
+    "asyncio-mqtt>=0.13.0",
+    "pandas>=2.0.0",
+    "jinja2>=3.1.6",
+]
+
+[project.optional-dependencies]
+docs = [
+    "mkdocs>=1.4.0",
+    "mkdocs-material>=9.0.0",
+    "mkdocstrings[python]>=0.20.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/EPTLLC/brs-recon"
+Documentation = "https://github.com/EPTLLC/brs-recon#readme"
+Repository = "https://github.com/EPTLLC/brs-recon.git"
+Issues = "https://github.com/EPTLLC/brs-recon/issues"
+Changelog = "https://github.com/EPTLLC/brs-recon/blob/main/CHANGELOG.md"
+Contact = "https://t.me/easyprotech"
+
+[project.scripts]
+brs-recon = "brsrecon.__main__:main"
+
+[tool.setuptools]
+
+[tool.setuptools.packages.find]
+include = ["brsrecon*"]
+
+# Black configuration
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+  | __pycache__
+)/
+'''
+
+# isort configuration
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["brsrecon"]
+
+
+# mypy configuration
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = [
+    "scapy.*",
+    "nmap.*",
+    "asyncio_mqtt.*",
+]
+ignore_missing_imports = true
+
+
+# Flake8 configuration (in setup.cfg since flake8 doesn't support pyproject.toml yet)

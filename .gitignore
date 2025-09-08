@@ -1,0 +1,118 @@
+# BRS-RECON .gitignore
+
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: Sun 07 Sep 2025
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Scan results (optional - uncomment to ignore)
+results/scans/*.json
+results/html/*.html
+results/csv/*.csv
+results/sarif/*.sarif
+results/xml/*.xml
+results/exports/*.json
+
+# Configuration files with secrets
+config/secrets.yaml
+config/local.yaml
+.secrets
+*.key
+*.pem
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+.tox/
+.nox/
+
+# Documentation builds
+docs/_build/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Runtime
+*.pid
+*.sock
+
+# Security scan artifacts
+nmap_*.xml
+nmap_*.gnmap
+nmap_*.nmap
+*.pcap
+*.cap
+
+# Wordlists (large files)
+wordlists/*.txt
+wordlists/*.lst
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3

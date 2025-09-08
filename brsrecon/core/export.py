@@ -1,0 +1,365 @@
+"""
+Project: BRS-RECON (Network Reconnaissance Tool)
+Company: EasyProTech LLC (www.easypro.tech)
+Dev: Brabus
+Date: Sun 07 Sep 2025
+Status: Modified
+Telegram: https://t.me/EasyProTech
+"""
+
+import csv
+import json
+import xml.etree.ElementTree as ET
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+from jinja2 import Template
+
+from .models import ScanResult
+from .utils import ensure_directory, sanitize_filename
+
+
+class ExportManager:
+    """Advanced export manager with multiple formats"""
+
+    def __init__(self, results_dir: str = "results"):
+        self.results_dir = Path(results_dir)
+        self._setup_export_directories()
+
+    def _setup_export_directories(self):
+        """Setup export directory structure"""
+        formats = ["html", "json", "sarif", "xml", "csv"]
+        for fmt in formats:
+            ensure_directory(self.results_dir / fmt)
+
+    def export_result(
+        self, result: ScanResult, formats: List[str] = None
+    ) -> Dict[str, str]:
+        """Export scan result in multiple formats"""
+        if formats is None:
+            formats = ["json"]
+
+        exported_files = {}
+
+        for fmt in formats:
+            try:
+                if fmt == "json":
+                    filepath = self._export_json(result)
+                elif fmt == "html":
+                    filepath = self._export_html(result)
+                elif fmt == "sarif":
+                    filepath = self._export_sarif(result)
+                elif fmt == "xml":
+                    filepath = self._export_xml(result)
+                elif fmt == "csv":
+                    filepath = self._export_csv(result)
+                else:
+                    continue
+
+                exported_files[fmt] = filepath
+
+            except Exception as e:
+                print(f"Error exporting {fmt}: {e}")
+
+        return exported_files
+
+    def _export_json(self, result: ScanResult) -> str:
+        """Export as JSON"""
+        target = sanitize_filename(result.target)
+        # scan_type currently unused
+        filename = f"brs-recon_{target}_{result.timestamp}.json"
+        filepath = self.results_dir / "json" / filename
+
+        export_data = {
+            "metadata": {
+                "scanner": "BRS-RECON",
+                "version": "0.0.1",
+                "timestamp": result.timestamp,
+                "target": result.target,
+                "scan_type": result.scan_type,
+                "duration": result.duration,
+                "status": result.status,
+            },
+            "results": result.data,
+            "error": result.error,
+        }
+
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(export_data, f, indent=2, ensure_ascii=False)
+
+        return str(filepath)
+
+    def _export_html(self, result: ScanResult) -> str:
+        """Export as HTML report"""
+        target = sanitize_filename(result.target)
+        filename = f"brs-recon_{target}_{result.timestamp}.html"
+        filepath = self.results_dir / "html" / filename
+
+        html_template = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRS-RECON Report - {{ target }}</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .header { background: #2c3e50; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .section { background: white; margin: 15px 0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .success { border-left: 5px solid #27ae60; }
+        .error { border-left: 5px solid #e74c3c; }
+        .warning { border-left: 5px solid #f39c12; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #34495e; color: white; }
+        .key { font-weight: bold; min-width: 200px; }
+        .highlight { background-color: #fff3cd; }
+        pre { background: #f8f9fa; padding: 15px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>BRS-RECON Scan Report</h1>
+        <p><strong>Target:</strong> {{ target }}</p>
+        <p><strong>Scan Type:</strong> {{ scan_type }}</p>
+        <p><strong>Timestamp:</strong> {{ timestamp }}</p>
+        <p><strong>Duration:</strong> {{ duration }}s</p>
+        <p><strong>Status:</strong> {{ status }}</p>
+    </div>
+
+    {% if error %}
+    <div class="section error">
+        <h2>Error</h2>
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+
+    <div class="section {{ 'success' if status == 'completed' else 'error' }}">
+        <h2>Scan Results</h2>
+        <pre>{{ results_json }}</pre>
+    </div>
+
+    <div class="section">
+        <p><em>Generated by BRS-RECON v0.0.1 - EasyProTech LLC</em></p>
+        <p><em>Contact: https://t.me/EasyProTech</em></p>
+    </div>
+</body>
+</html>
+        """
+
+        template = Template(html_template)
+        html_content = template.render(
+            target=result.target,
+            scan_type=result.scan_type,
+            timestamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            duration=f"{result.duration:.2f}",
+            status=result.status,
+            error=result.error,
+            results_json=json.dumps(result.data, indent=2, ensure_ascii=False),
+        )
+
+        with open(filepath, "w", encoding="utf-8") as f:
+            f.write(html_content)
+
+        return str(filepath)
+
+    def _export_sarif(self, result: ScanResult) -> str:
+        """Export as SARIF format for security tools"""
+        target = sanitize_filename(result.target)
+        filename = f"brs-recon_{target}_{result.timestamp}.sarif"
+        filepath = self.results_dir / "sarif" / filename
+
+        # Basic SARIF structure
+        sarif_data = {
+            "version": "2.1.0",
+            "runs": [
+                {
+                    "tool": {
+                        "driver": {
+                            "name": "BRS-RECON",
+                            "version": "0.0.1",
+                            "informationUri": "https://t.me/EasyProTech",
+                        }
+                    },
+                    "results": [],
+                    "invocations": [
+                        {
+                            "startTimeUtc": datetime.now().isoformat() + "Z",
+                            "endTimeUtc": datetime.now().isoformat() + "Z",
+                            "executionSuccessful": result.status == "completed",
+                        }
+                    ],
+                }
+            ],
+        }
+
+        # Convert vulnerabilities to SARIF findings
+        if "vulnerabilities" in result.data:
+            for vuln in result.data["vulnerabilities"]:
+                sarif_result = {
+                    "ruleId": f"BRS-{vuln.get('type', 'unknown').upper()}-001",
+                    "message": {"text": vuln.get("title", "Unknown vulnerability")},
+                    "level": self._severity_to_sarif_level(
+                        vuln.get("severity", "medium")
+                    ),
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {"uri": result.target}
+                            }
+                        }
+                    ],
+                }
+                sarif_data["runs"][0]["results"].append(sarif_result)
+
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(sarif_data, f, indent=2)
+
+        return str(filepath)
+
+    def _export_xml(self, result: ScanResult) -> str:
+        """Export as XML"""
+        target = sanitize_filename(result.target)
+        filename = f"brs-recon_{target}_{result.timestamp}.xml"
+        filepath = self.results_dir / "xml" / filename
+
+        root = ET.Element("brs_recon_report")
+
+        # Metadata
+        metadata = ET.SubElement(root, "metadata")
+        ET.SubElement(metadata, "scanner").text = "BRS-RECON"
+        ET.SubElement(metadata, "version").text = "0.0.1"
+        ET.SubElement(metadata, "target").text = result.target
+        ET.SubElement(metadata, "scan_type").text = result.scan_type
+        ET.SubElement(metadata, "timestamp").text = result.timestamp
+        ET.SubElement(metadata, "duration").text = str(result.duration)
+        ET.SubElement(metadata, "status").text = result.status
+
+        # Results
+        results_elem = ET.SubElement(root, "results")
+        self._dict_to_xml(result.data, results_elem)
+
+        # Write XML
+        tree = ET.ElementTree(root)
+        ET.indent(tree, space="  ", level=0)
+        tree.write(filepath, encoding="utf-8", xml_declaration=True)
+
+        return str(filepath)
+
+    def _export_csv(self, result: ScanResult) -> str:
+        """Export as CSV"""
+        target = sanitize_filename(result.target)
+        filename = f"brs-recon_{target}_{result.timestamp}.csv"
+        filepath = self.results_dir / "csv" / filename
+
+        # Extract tabular data
+        rows = self._extract_csv_data(result)
+
+        if rows:
+            with open(filepath, "w", newline="", encoding="utf-8") as f:
+                writer = csv.DictWriter(f, fieldnames=rows[0].keys())
+                writer.writeheader()
+                writer.writerows(rows)
+
+        return str(filepath)
+
+    def _severity_to_sarif_level(self, severity: str) -> str:
+        """Convert severity to SARIF level"""
+        mapping = {
+            "low": "note",
+            "medium": "warning",
+            "high": "error",
+            "critical": "error",
+        }
+        return mapping.get(severity.lower(), "warning")
+
+    def _dict_to_xml(self, data: Any, parent: ET.Element, key: str = "item"):
+        """Convert dictionary to XML elements"""
+        if isinstance(data, dict):
+            for k, v in data.items():
+                elem = ET.SubElement(parent, k)
+                self._dict_to_xml(v, elem)
+        elif isinstance(data, list):
+            for item in data:
+                elem = ET.SubElement(parent, key)
+                self._dict_to_xml(item, elem)
+        else:
+            parent.text = str(data) if data is not None else ""
+
+    def _extract_csv_data(self, result: ScanResult) -> List[Dict]:
+        """Extract tabular data for CSV export"""
+        rows = []
+
+        # Base row with scan info
+        base_row = {
+            "timestamp": result.timestamp,
+            "target": result.target,
+            "scan_type": result.scan_type,
+            "status": result.status,
+            "duration": result.duration,
+        }
+
+        # Extract specific data based on scan type
+        if "open_ports" in result.data:
+            for port in result.data["open_ports"]:
+                row = base_row.copy()
+                row.update(
+                    {
+                        "type": "open_port",
+                        "port": port,
+                        "service": result.data.get("services", {})
+                        .get(port, {})
+                        .get("service", "unknown"),
+                    }
+                )
+                rows.append(row)
+
+        if "vulnerabilities" in result.data:
+            for vuln in result.data["vulnerabilities"]:
+                row = base_row.copy()
+                row.update(
+                    {
+                        "type": "vulnerability",
+                        "severity": vuln.get("severity", "unknown"),
+                        "source": vuln.get("source", "unknown"),
+                        "title": vuln.get("title", ""),
+                    }
+                )
+                rows.append(row)
+
+        if "live_hosts" in result.data:
+            for host in result.data["live_hosts"]:
+                row = base_row.copy()
+                row.update({"type": "live_host", "host": host})
+                rows.append(row)
+
+        # If no specific data, add summary row
+        if not rows:
+            rows.append(base_row)
+
+        return rows
+
+    def export_to_html(
+        self, result: ScanResult, output_file: Optional[str] = None
+    ) -> str:
+        """Export single result to HTML format"""
+        return self._export_html(result)
+
+    def export_to_sarif(
+        self, result: ScanResult, output_file: Optional[str] = None
+    ) -> str:
+        """Export single result to SARIF format"""
+        return self._export_sarif(result)
+
+    def export_to_csv(
+        self, result: ScanResult, output_file: Optional[str] = None
+    ) -> str:
+        """Export single result to CSV format"""
+        return self._export_csv(result)
+
+    def export_to_xml(
+        self, result: ScanResult, output_file: Optional[str] = None
+    ) -> str:
+        """Export single result to XML format"""
+        return self._export_xml(result)

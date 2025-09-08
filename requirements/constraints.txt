@@ -1,0 +1,48 @@
+# BRS-RECON Dependency Constraints
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: 2025-09-07
+# Status: Created
+# Telegram: https://t.me/easyprotech
+
+# Security constraints - known vulnerable versions
+# CVE-2023-5752: pip before 23.3
+pip>=23.3
+
+# CVE-2022-40897: setuptools before 65.5.1
+setuptools>=65.5.1
+
+# CVE-2023-43804: urllib3 before 2.0.7
+urllib3>=2.0.7
+
+# CVE-2024-35195, CVE-2024-47081: requests before 2.32.4
+requests>=2.32.4
+
+# CVE-2024-22195, CVE-2025-27516, CVE-2024-34064, CVE-2024-56326, CVE-2024-56201: Jinja2 before 3.1.6
+Jinja2>=3.1.6
+
+# Performance and compatibility constraints
+# Ensure compatibility with Python 3.8+
+typing-extensions>=4.0.0; python_version < "3.8"
+
+# Network library constraints
+# aiohttp compatibility: 3.12.x lacks Python 3.8 wheels. Allow 3.8 runners to pick 3.11.x.
+aiohttp>=3.8.1,<4.0.0
+scapy>=2.5.0,<3.0.0    # Major version constraint
+
+# Testing framework constraints
+pytest>=7.0.0,<8.0.0
+pytest-cov>=4.0.0,<5.0.0
+
+# Code quality constraints
+black>=23.0.0,<24.0.0
+flake8>=6.0.0,<7.0.0
+mypy>=1.0.0,<2.0.0
+
+# Documentation constraints
+sphinx>=7.0.0,<8.0.0
+
+# Build constraints
+build>=1.0.0,<2.0.0
+wheel>=0.40.0,<1.0.0

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRS-RECON Security Assessment Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .scan-info {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .scan-info h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .info-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-item strong {
+            color: #495057;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .results-section {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .results-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .vulnerability {
+            background: #fff5f5;
+            border: 1px solid #fed7d7;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .vulnerability.high {
+            border-left: 5px solid #e53e3e;
+        }
+        
+        .vulnerability.medium {
+            border-left: 5px solid #dd6b20;
+            background: #fffaf0;
+            border-color: #fbd38d;
+        }
+        
+        .vulnerability.low {
+            border-left: 5px solid #38a169;
+            background: #f0fff4;
+            border-color: #9ae6b4;
+        }
+        
+        .vuln-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .vuln-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .severity-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .severity-high { background: #fed7d7; color: #c53030; }
+        .severity-medium { background: #fbd38d; color: #c05621; }
+        .severity-low { background: #9ae6b4; color: #276749; }
+        
+        .hosts-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .hosts-table th,
+        .hosts-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .hosts-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .hosts-table tr:hover {
+            background: #f7fafc;
+        }
+        
+        .status-online {
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        .ports-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .port-badge {
+            background: #667eea;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #f39c12;
+        }
+        
+        .warning-box h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 BRS-RECON Security Assessment</h1>
+            <div class="subtitle">Comprehensive Network Reconnaissance Report</div>
+        </div>
+
+        <div class="warning-box">
+            <h3>⚠️ Authorized Testing Only</h3>
+            <p>This report contains security assessment results. Ensure you have explicit authorization before testing any systems. Unauthorized scanning may violate local laws and regulations.</p>
+        </div>
+
+        <div class="scan-info">
+            <h2>📊 Scan Information</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Target</strong>
+                    example.com
+                </div>
+                <div class="info-item">
+                    <strong>Scan Type</strong>
+                    Comprehensive Assessment
+                </div>
+                <div class="info-item">
+                    <strong>Start Time</strong>
+                    2025-09-07 18:45:00 UTC
+                </div>
+                <div class="info-item">
+                    <strong>Duration</strong>
+                    2 minutes 30 seconds
+                </div>
+                <div class="info-item">
+                    <strong>BRS-RECON Version</strong>
+                    v0.0.1
+                </div>
+                <div class="info-item">
+                    <strong>Scan ID</strong>
+                    20250907-184500_comprehensive_example.com
+                </div>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2>🌐 Network Discovery Results</h2>
+            <p><strong>12 hosts discovered</strong> in the target network range</p>
+            
+            <table class="hosts-table">
+                <thead>
+                    <tr>
+                        <th>IP Address</th>
+                        <th>Hostname</th>
+                        <th>Status</th>
+                        <th>Response Time</th>
+                        <th>Open Ports</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>192.168.1.1</td>
+                        <td>router.local</td>
+                        <td><span class="status-online">Online</span></td>
+                        <td>1.2ms</td>
+                        <td>
+                            <div class="ports-list">
+                                <span class="port-badge">22</span>
+                                <span class="port-badge">80</span>
+                                <span class="port-badge">443</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>192.168.1.10</td>
+                        <td>server.local</td>
+                        <td><span class="status-online">Online</span></td>
+                        <td>0.8ms</td>
+                        <td>
+                            <div class="ports-list">
+                                <span class="port-badge">22</span>
+                                <span class="port-badge">80</span>
+                                <span class="port-badge">443</span>
+                                <span class="port-badge">3306</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>192.168.1.20</td>
+                        <td>-</td>
+                        <td><span class="status-online">Online</span></td>
+                        <td>2.1ms</td>
+                        <td>
+                            <div class="ports-list">
+                                <span class="port-badge">22</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="results-section">
+            <h2>🔍 Vulnerability Assessment</h2>
+            <p><strong>3 security issues</strong> identified during the assessment</p>
+
+            <div class="vulnerability high">
+                <div class="vuln-title">
+                    Known Vulnerability in Apache HTTP Server
+                    <span class="severity-badge severity-high">High</span>
+                </div>
+                <p>Apache HTTP Server 2.4.41 has known vulnerabilities that could allow remote code execution.</p>
+                <div class="vuln-details">
+                    <div><strong>CVE:</strong> CVE-2021-44790</div>
+                    <div><strong>CVSS Score:</strong> 8.1</div>
+                    <div><strong>Port:</strong> 80</div>
+                    <div><strong>Service:</strong> HTTP</div>
+                </div>
+            </div>
+
+            <div class="vulnerability medium">
+                <div class="vuln-title">
+                    Weak SSL/TLS Protocol Support
+                    <span class="severity-badge severity-medium">Medium</span>
+                </div>
+                <p>The server supports deprecated TLSv1.0 protocol which is vulnerable to various attacks.</p>
+                <div class="vuln-details">
+                    <div><strong>CWE:</strong> CWE-326</div>
+                    <div><strong>CVSS Score:</strong> 6.5</div>
+                    <div><strong>Port:</strong> 443</div>
+                    <div><strong>Protocol:</strong> TLSv1.0</div>
+                </div>
+            </div>
+
+            <div class="vulnerability low">
+                <div class="vuln-title">
+                    Missing Security Headers
+                    <span class="severity-badge severity-low">Low</span>
+                </div>
+                <p>The web server is missing important security headers like X-Frame-Options.</p>
+                <div class="vuln-details">
+                    <div><strong>CWE:</strong> CWE-1021</div>
+                    <div><strong>CVSS Score:</strong> 3.1</div>
+                    <div><strong>Port:</strong> 80</div>
+                    <div><strong>Header:</strong> X-Frame-Options</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2>📈 Scan Statistics</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Total Hosts Scanned</strong>
+                    256
+                </div>
+                <div class="info-item">
+                    <strong>Hosts Responding</strong>
+                    12 (4.7%)
+                </div>
+                <div class="info-item">
+                    <strong>Open Ports Found</strong>
+                    8 unique ports
+                </div>
+                <div class="info-item">
+                    <strong>Vulnerabilities</strong>
+                    3 (1 High, 1 Medium, 1 Low)
+                </div>
+                <div class="info-item">
+                    <strong>Services Identified</strong>
+                    SSH, HTTP, HTTPS, MySQL
+                </div>
+                <div class="info-item">
+                    <strong>Average Response Time</strong>
+                    1.37ms
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Generated by <strong>BRS-RECON v0.0.1</strong> | EasyProTech LLC | <a href="https://t.me/easyprotech">Contact</a></p>
+            <p>Report generated on: 2025-09-07 18:47:30 UTC</p>
+        </div>
+    </div>
+</body>
+</html>
