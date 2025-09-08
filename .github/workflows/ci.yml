@@ -107,10 +107,12 @@ jobs:
         
     - name: Run unit tests
       run: |
+        export BRS_RECON_TEST_SHIMS=1
         pytest tests/unit/ -v --cov=brsrecon --cov-report=xml --cov-report=html
         
     - name: Run integration tests (non-privileged)
       run: |
+        export BRS_RECON_TEST_SHIMS=1
         pytest tests/integration/ -v -m "not privileged" --cov-append --cov=brsrecon --cov-report=xml
       continue-on-error: true  # Integration tests may fail in CI environment
       

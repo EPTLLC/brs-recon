@@ -7,13 +7,14 @@ Status: Modified
 Telegram: https://t.me/EasyProTech
 """
 
-from typing import Dict, Any, Optional
 from dataclasses import dataclass
+from typing import Any, Dict, Optional
 
 
 @dataclass
 class ScanResult:
     """Base scan result structure"""
+
     timestamp: str
     target: str
     scan_type: str

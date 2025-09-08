@@ -1,3 +1,12 @@
+<!--
+Project: BRS-RECON (Network Reconnaissance Tool)
+Company: EasyProTech LLC (www.easypro.tech)
+Dev: Brabus
+Date: 2025-09-08 (UTC)
+Status: Modified
+Telegram: https://t.me/easyprotech
+-->
+
 # BRS-RECON
 
 **Python Network Reconnaissance Toolkit**
@@ -682,6 +691,25 @@ brs-recon vuln target.com --scan-type basic
 ```bash
 brs-recon --log-level DEBUG network target.com
 ```
+
+### Testing & Development
+
+> Development-only instructions. Do not enable test shims in production.
+
+```bash
+# Enable test shims so legacy test shortcuts (builtins) are available during pytest
+export BRS_RECON_TEST_SHIMS=1
+
+# Run tests
+pytest -q
+
+# Code quality
+isort .
+black .
+flake8 .
+```
+
+Production note: unset `BRS_RECON_TEST_SHIMS` in production environments.
 
 ---
 

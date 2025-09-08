@@ -13,6 +13,6 @@ Telegram: https://t.me/EasyProTech
 
 __all__ = [
     # "app",
-    # "BRSInterface", 
+    # "BRSInterface",
     # "ProgressManager",
 ]

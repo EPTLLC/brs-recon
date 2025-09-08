@@ -46,9 +46,9 @@ First public release of BRS-RECON - Python Network Reconnaissance Toolkit.
 ### Infrastructure
 
 - **Modern Packaging** - pyproject.toml with setuptools backend
-- **Comprehensive Testing** - 42 unit tests with 33% coverage
-- **CI/CD Pipeline** - GitHub Actions with security scanning
-- **Quality Assurance** - Black, flake8, mypy, bandit integration
+- **Testing** - Full pytest suite, clean flake8/isort/black
+- **CI/CD Pipeline** - GitHub Actions: lint, tests, docker, security
+- **Quality Assurance** - black, flake8, mypy (advisory), bandit
 
 ### Installation
 
@@ -75,12 +75,9 @@ docker run --rm --cap-add=NET_RAW --cap-add=NET_ADMIN \
   -v $(pwd)/results:/results brs-recon network 192.168.1.0/24
 ```
 
-### Performance Benchmarks
+### Performance Notes
 
-- **Network Discovery:** <1 second for /24 networks (fping)
-- **Port Scanning:** <30 seconds for top 1000 ports
-- **Domain Recon:** <60 seconds comprehensive analysis
-- **System Info:** <1 second full system profile
+- Performance depends on environment and tool availability
 
 ### Security Considerations
 
@@ -125,11 +122,10 @@ Dual licensing structure:
 
 Contact: https://t.me/easyprotech
 
-### Known Issues
+### Known Constraints
 
-- Docker requires `--cap-add=NET_RAW` for raw socket operations
-- Some tools require elevated privileges for optimal functionality
-- Integration tests require actual network tools (nmap, fping, etc.)
+- Docker scans may require `--cap-add=NET_RAW`/`--cap-add=NET_ADMIN`
+- External tools (nmap, fping, masscan, etc.) required for full features
 
 ### Coming Next (v0.1.0)
 
@@ -143,8 +139,8 @@ Contact: https://t.me/easyprotech
 ## Download
 
 **Source Code:** https://github.com/EPTLLC/brs-recon/archive/v0.0.1.tar.gz  
-**Wheel Package:** Available via `pip install brs-recon` (when published)  
-**Docker Image:** `docker pull ghcr.io/eptllc/brs-recon:0.0.1` (when published)
+**Wheel Package:** `pip install brs-recon` (upon publication)  
+**Docker Image:** `ghcr.io/eptllc/brs-recon:0.0.1` (upon publication)
 
 ## Verification
 

@@ -1,0 +1,23 @@
+{
+  "timestamp": "20250908-102217",
+  "target": "example.com",
+  "scan_type": "Port Scanning",
+  "status": "completed",
+  "data": {
+    "target": "example.com",
+    "open_ports": [
+      {
+        "port": 80,
+        "service": "http"
+      }
+    ],
+    "scan_duration": 5.1
+  },
+  "duration": 3.0994415283203125e-05,
+  "error": null,
+  "metadata": {
+    "scanner": "BRS-RECON",
+    "version": "0.0.1",
+    "saved_at": "2025-09-08T10:22:17.730492"
+  }
+}

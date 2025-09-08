@@ -7,12 +7,13 @@ Status: Modified
 Telegram: https://t.me/EasyProTech
 """
 
+from .domain_recon import DomainRecon
+
 # Reconnaissance modules
 from .network_discovery import NetworkDiscovery
 from .port_scanning import PortScanning
-from .domain_recon import DomainRecon
-from .vulnerability import VulnerabilityScanner
 from .system_info import SystemInfo
+from .vulnerability import VulnerabilityScanner
 
 __all__ = [
     "NetworkDiscovery",

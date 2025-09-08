@@ -9,12 +9,29 @@ Telegram: https://t.me/EasyProTech
 
 # Core components
 from .base import BaseModule, ScanConfig
-from .config import BRSConfig, get_config
+from .config import BRSConfig, get_config, load_config_from_file
+from .export import ExportManager
 from .logger import get_logger
 from .models import ScanResult
 from .results import ResultsManager
-from .export import ExportManager
-from .utils import validate_target, format_timestamp
+from .utils import format_timestamp, validate_target
+
+
+def get_system_info():
+    import platform
+
+    return {
+        "hostname": platform.node(),
+        "operating_system": platform.system(),
+        "python_version": platform.python_version(),
+    }
+
+
+def get_network_interfaces():
+    import psutil
+
+    return list(psutil.net_if_addrs().keys())
+
 
 __all__ = [
     "BaseModule",
@@ -27,4 +44,5 @@ __all__ = [
     "ExportManager",
     "validate_target",
     "format_timestamp",
+    "load_config_from_file",
 ]

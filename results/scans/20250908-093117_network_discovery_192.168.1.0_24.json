@@ -1,0 +1,22 @@
+{
+  "timestamp": "20250908-093117",
+  "target": "192.168.1.0/24",
+  "scan_type": "Network Discovery",
+  "status": "completed",
+  "data": {
+    "target": "192.168.1.0/24",
+    "discovered_hosts": [
+      {
+        "ip": "192.168.1.1"
+      }
+    ],
+    "scan_duration": 2.5
+  },
+  "duration": 3.9577484130859375e-05,
+  "error": null,
+  "metadata": {
+    "scanner": "BRS-RECON",
+    "version": "0.0.1",
+    "saved_at": "2025-09-08T09:31:17.146405"
+  }
+}

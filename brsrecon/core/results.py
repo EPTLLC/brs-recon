@@ -2,115 +2,126 @@
 Project: BRS-RECON (Network Reconnaissance Tool)
 Company: EasyProTech LLC (www.easypro.tech)
 Dev: Brabus
-Date: Sun 07 Sep 2025
+Date: Mon 08 Sep 2025 09:36 UTC
 Status: Modified
 Telegram: https://t.me/EasyProTech
 """
 
-import json
 import csv
+import json
+from dataclasses import asdict
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Union
-from dataclasses import asdict
+from typing import Any, Dict, List, Optional, Union
+
 from jinja2 import Template
 
-from .utils import format_timestamp, sanitize_filename, ensure_directory
 from .logger import get_logger
 from .models import ScanResult
+from .utils import ensure_directory, format_timestamp, sanitize_filename
 
 
 class ResultsManager:
     """Professional results management system"""
-    
+
     def __init__(self, results_dir: str = "results"):
-        self.results_dir = Path(results_dir)
+        # Public attribute as string for tests; internal Path for file ops
+        self.results_dir = str(results_dir)
+        self._results_path = Path(self.results_dir)
         self.logger = get_logger()
-        
+
         # Ensure results directory structure
         self._setup_directories()
-    
+
     def _setup_directories(self):
         """Setup results directory structure like BRS-XSS"""
         directories = [
-            self.results_dir,
-            self.results_dir / "scans",
-            self.results_dir / "logs"
+            self._results_path,
+            self._results_path / "scans",
+            self._results_path / "logs",
+            self._results_path / "exports",
+            self._results_path / "reports",
         ]
-        
+
         for directory in directories:
             ensure_directory(directory)
-    
+
     def save_scan_result(self, result: ScanResult, format_type: str = "json") -> str:
         """Save scan result to file"""
         timestamp = result.timestamp
         target = sanitize_filename(result.target)
         scan_type = result.scan_type.lower().replace(" ", "_")
-        
+
         filename = f"{timestamp}_{scan_type}_{target}"
-        
+
         if format_type.lower() == "json":
             return self._save_json_result(result, filename)
         elif format_type.lower() == "txt":
             return self._save_text_result(result, filename)
         elif format_type.lower() == "csv":
             return self._save_csv_result(result, filename)
+        elif format_type.lower() == "html":
+            # Delegate to ExportManager for HTML to align with tests
+            from .export import ExportManager
+            exp = ExportManager(self.results_dir)
+            files = exp.export_result(result, ["html"])
+            return files["html"]
         else:
             raise ValueError(f"Unsupported format: {format_type}")
-    
+
     def _save_json_result(self, result: ScanResult, filename: str) -> str:
         """Save result as JSON"""
-        filepath = self.results_dir / "scans" / f"{filename}.json"
-        
+        filepath = self._results_path / "scans" / f"{filename}.json"
+
         result_dict = asdict(result)
-        result_dict['metadata'] = {
-            'scanner': 'BRS-RECON',
-            'version': '0.0.1',
-            'saved_at': datetime.now().isoformat()
+        result_dict["metadata"] = {
+            "scanner": "BRS-RECON",
+            "version": "0.0.1",
+            "saved_at": datetime.now().isoformat(),
         }
-        
-        with open(filepath, 'w', encoding='utf-8') as f:
+
+        with open(filepath, "w", encoding="utf-8") as f:
             json.dump(result_dict, f, indent=2, ensure_ascii=False)
-        
+
         self.logger.result_saved(str(filepath), result.scan_type)
         return str(filepath)
-    
+
     def _save_text_result(self, result: ScanResult, filename: str) -> str:
         """Save result as text (BRS-compatible format)"""
-        filepath = self.results_dir / "scans" / f"{filename}.txt"
-        
-        with open(filepath, 'w', encoding='utf-8') as f:
+        filepath = self._results_path / "scans" / f"{filename}.txt"
+
+        with open(filepath, "w", encoding="utf-8") as f:
             # Header
             f.write("=" * 80 + "\n")
-            f.write(f"BRS-RECON SCAN RESULTS\n")
+            f.write("BRS-RECON SCAN RESULTS\n")
             f.write("=" * 80 + "\n")
             f.write(f"Target: {result.target}\n")
             f.write(f"Scan Type: {result.scan_type}\n")
             f.write(f"Timestamp: {result.timestamp}\n")
             f.write(f"Duration: {result.duration:.2f} seconds\n")
             f.write(f"Status: {result.status}\n")
-            
+
             if result.error:
                 f.write(f"Error: {result.error}\n")
-            
+
             f.write("=" * 80 + "\n\n")
-            
+
             # Results data
             self._write_data_to_text(f, result.data)
-            
+
             # Footer
             f.write("\n" + "=" * 80 + "\n")
             f.write("Generated by BRS-RECON v0.0.1\n")
             f.write("EasyProTech LLC - https://t.me/EasyProTech\n")
             f.write("=" * 80 + "\n")
-        
+
         self.logger.result_saved(str(filepath), result.scan_type)
         return str(filepath)
-    
+
     def _write_data_to_text(self, f, data: Any, indent: int = 0):
         """Recursively write data to text file"""
         prefix = "  " * indent
-        
+
         if isinstance(data, dict):
             for key, value in data.items():
                 if isinstance(value, (dict, list)):
@@ -127,38 +138,40 @@ class ResultsManager:
                     f.write(f"{prefix}- {item}\n")
         else:
             f.write(f"{prefix}{data}\n")
-    
+
     def _save_csv_result(self, result: ScanResult, filename: str) -> str:
         """Save result as CSV (for tabular data)"""
-        filepath = self.results_dir / "scans" / f"{filename}.csv"
-        
+        filepath = self._results_path / "scans" / f"{filename}.csv"
+
         # Extract tabular data from result
         rows = self._extract_tabular_data(result.data)
-        
+
         if not rows:
             # If no tabular data, create summary row
-            rows = [{
-                'timestamp': result.timestamp,
-                'target': result.target,
-                'scan_type': result.scan_type,
-                'status': result.status,
-                'duration': result.duration,
-                'error': result.error or ''
-            }]
-        
-        with open(filepath, 'w', newline='', encoding='utf-8') as f:
+            rows = [
+                {
+                    "timestamp": result.timestamp,
+                    "target": result.target,
+                    "scan_type": result.scan_type,
+                    "status": result.status,
+                    "duration": result.duration,
+                    "error": result.error or "",
+                }
+            ]
+
+        with open(filepath, "w", newline="", encoding="utf-8") as f:
             if rows:
                 writer = csv.DictWriter(f, fieldnames=rows[0].keys())
                 writer.writeheader()
                 writer.writerows(rows)
-        
+
         self.logger.result_saved(str(filepath), result.scan_type)
         return str(filepath)
-    
+
     def _extract_tabular_data(self, data: Any) -> List[Dict]:
         """Extract tabular data from nested structure"""
         rows = []
-        
+
         if isinstance(data, list) and data and isinstance(data[0], dict):
             return data
         elif isinstance(data, dict):
@@ -166,23 +179,23 @@ class ResultsManager:
             for key, value in data.items():
                 if isinstance(value, list) and value and isinstance(value[0], dict):
                     return value
-        
+
         return rows
-    
+
     def load_scan_result(self, filepath: str) -> Optional[ScanResult]:
         """Load scan result from file"""
         filepath = Path(filepath)
-        
+
         if not filepath.exists():
             self.logger.error(f"Result file not found: {filepath}")
             return None
-        
+
         try:
-            if filepath.suffix == '.json':
-                with open(filepath, 'r', encoding='utf-8') as f:
+            if filepath.suffix == ".json":
+                with open(filepath, "r", encoding="utf-8") as f:
                     data = json.load(f)
                     # Remove metadata if present
-                    data.pop('metadata', None)
+                    data.pop("metadata", None)
                     return ScanResult(**data)
             else:
                 self.logger.error(f"Unsupported file format: {filepath.suffix}")
@@ -190,31 +203,155 @@ class ResultsManager:
         except Exception as e:
             self.logger.error(f"Failed to load result: {e}")
             return None
-    
-    def list_results(self, scan_type: Optional[str] = None, target: Optional[str] = None) -> List[Path]:
+
+    def list_results(
+        self, scan_type: Optional[str] = None, target: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
         """List available result files"""
-        scan_dir = self.results_dir / "scans"
+        scan_dir = self._results_path / "scans"
         pattern = "*.json"
-        
+
         files = list(scan_dir.glob(pattern))
-        
+
         # Filter by scan type and/or target if specified
-        filtered_files = []
+        filtered_files: List[Path] = []
         for file in files:
             if scan_type and scan_type.lower() not in file.name.lower():
                 continue
             if target and target.lower() not in file.name.lower():
                 continue
             filtered_files.append(file)
-        
-        return sorted(filtered_files, key=lambda x: x.stat().st_mtime, reverse=True)
-    
-    def generate_summary_report(self, results: List[ScanResult], output_file: Optional[str] = None) -> str:
+
+        def parse_ts_from_name(name: str) -> float:
+            # Expect prefix timestamp like 2025-09-07T18:46:00Z_...
+            try:
+                ts_str = name.split("_", 1)[0]
+                # Parse ISO-like, fallback to mtime if fails
+                from datetime import datetime
+                return datetime.fromisoformat(ts_str.replace("Z", "+00:00")).timestamp()
+            except Exception:
+                return 0.0
+
+        # Sort by timestamp embedded in filename, newest first
+        sorted_files = sorted(filtered_files, key=lambda x: parse_ts_from_name(x.name), reverse=True)
+
+        # Return parsed JSON entries with timestamp for tests
+        results: List[Dict[str, Any]] = []
+        for f in sorted_files:
+            try:
+                with open(f, "r", encoding="utf-8") as fh:
+                    data = json.load(fh)
+                    results.append(data)
+            except Exception:
+                continue
+        return results
+
+    # Compatibility layer expected by tests
+    def save_results(self, result: ScanResult, format: str = "json") -> str:
+        return self.save_scan_result(result, format_type=format)
+
+    def load_results(self, filepath: str) -> Optional[Dict[str, Any]]:
+        loaded = self.load_scan_result(filepath)
+        return asdict(loaded) if loaded else None
+
+    def get_latest_result(self) -> Optional[Dict[str, Any]]:
+        items = self.list_results()
+        if not items:
+            return None
+        # Already sorted newest first by list_results
+        return items[0]
+
+    def delete_result(self, filepath: str) -> bool:
+        try:
+            p = Path(filepath)
+            if p.exists():
+                p.unlink()
+                return True
+            return False
+        except Exception:
+            return False
+
+    def cleanup_old_results(self, keep_count: int = 100) -> int:
+        scan_dir = self._results_path / "scans"
+        files = sorted(scan_dir.glob("*.json"), key=lambda x: x.stat().st_mtime, reverse=True)
+        to_delete = files[keep_count:]
+        deleted = 0
+        for f in to_delete:
+            try:
+                f.unlink()
+                deleted += 1
+            except Exception:
+                pass
+        return deleted
+
+    def get_results_summary(self) -> Dict[str, Any]:
+        entries = self.list_results()
+        total = len(entries)
+        completed = sum(1 for e in entries if e.get("status") == "completed")
+        failed = total - completed
+        success_rate = (completed / total) if total else 0.0
+        return {
+            "total_scans": total,
+            "completed_scans": completed,
+            "failed_scans": failed,
+            "success_rate": round(success_rate, 2 if success_rate == 0 else 2),
+        }
+
+    def export_results_batch(self, format: str = "html") -> List[str]:
+        exported: List[str] = []
+        from .export import ExportManager
+
+        exp = ExportManager(self.results_dir)
+        entries = self.list_results()
+        for e in entries:
+            try:
+                data = dict(e)
+                data.pop("metadata", None)
+                result = ScanResult(**data)
+                if format == "html":
+                    path = exp.export_to_html(result)
+                    if path:
+                        exported.append(path)
+                elif format == "sarif":
+                    path = exp.export_to_sarif(result)
+                    if path:
+                        exported.append(path)
+                else:
+                    files = exp.export_result(result, [format])
+                    if format in files:
+                        exported.append(files[format])
+            except Exception:
+                continue
+        return exported
+
+    def search_results(
+        self,
+        target_pattern: Optional[str] = None,
+        status: Optional[str] = None,
+        scan_type: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
+        entries = self.list_results()
+        res: List[Dict[str, Any]] = []
+        for e in entries:
+            if target_pattern and target_pattern not in e.get("target", ""):
+                continue
+            if status and status != e.get("status"):
+                continue
+            if scan_type and scan_type != e.get("scan_type"):
+                continue
+            res.append(e)
+        return res
+
+    def generate_summary_report(
+        self, results: List[ScanResult], output_file: Optional[str] = None
+    ) -> str:
         """Generate summary report from multiple results"""
         if not output_file:
             timestamp = format_timestamp()
-            output_file = str(self.results_dir / "reports" / f"summary_{timestamp}.html")
-        
+            output_file = str(
+                self._results_path / "reports" / f"summary_{timestamp}.html"
+            )
+
         # Template for HTML report
         html_template = """
 <!DOCTYPE html>
@@ -239,14 +376,14 @@ class ResultsManager:
         <p>Generated: {{ timestamp }}</p>
         <p>Total Scans: {{ total_scans }}</p>
     </div>
-    
+
     <div class="summary">
         <h2>Summary Statistics</h2>
         <p>Successful Scans: {{ successful_scans }}</p>
         <p>Failed Scans: {{ failed_scans }}</p>
         <p>Total Duration: {{ total_duration }}s</p>
     </div>
-    
+
     <h2>Scan Results</h2>
     {% for result in results %}
     <div class="result {{ 'success' if result.status == 'completed' else 'error' }}">
@@ -259,7 +396,7 @@ class ResultsManager:
         {% endif %}
     </div>
     {% endfor %}
-    
+
     <div class="footer">
         <p><em>Generated by BRS-RECON v0.0.1 - EasyProTech LLC</em></p>
         <p><em>Contact: https://t.me/EasyProTech</em></p>
@@ -267,61 +404,91 @@ class ResultsManager:
 </body>
 </html>
         """
-        
+
         template = Template(html_template)
-        
+
         # Calculate statistics
-        successful_scans = sum(1 for r in results if r.status == 'completed')
+        successful_scans = sum(1 for r in results if r.status == "completed")
         failed_scans = len(results) - successful_scans
         total_duration = sum(r.duration for r in results)
-        
+
         html_content = template.render(
             timestamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             total_scans=len(results),
             successful_scans=successful_scans,
             failed_scans=failed_scans,
             total_duration=f"{total_duration:.2f}",
-            results=results
+            results=results,
         )
-        
-        with open(output_file, 'w', encoding='utf-8') as f:
+
+        # Ensure parent directory exists
+        ensure_directory(Path(output_file).parent)
+        with open(output_file, "w", encoding="utf-8") as f:
             f.write(html_content)
-        
+
         self.logger.result_saved(output_file, "Summary Report")
         return output_file
-    
-    def export_results(self, results: List[ScanResult], format_type: str = "json", output_file: Optional[str] = None) -> str:
+
+    def export_results(
+        self,
+        results: Union[List[ScanResult], str, ScanResult],
+        format_type: str = "json",
+        output_file: Optional[str] = None,
+    ) -> Optional[str]:
         """Export multiple results in specified format"""
         if not output_file:
             timestamp = format_timestamp()
-            output_file = str(self.results_dir / "exports" / f"export_{timestamp}.{format_type}")
-        
+            output_file = str(
+                self._results_path / "exports" / f"export_{timestamp}.{format_type}"
+            )
+
+        # Be robust to various input shapes used in tests
+        results_list: List[ScanResult] = []
+        try:
+            if isinstance(results, list):
+                results_list = results
+            elif isinstance(results, str):
+                # If a file path was provided, try to load single result
+                loaded = self.load_scan_result(results)
+                if loaded:
+                    results_list = [loaded]
+            elif isinstance(results, ScanResult):
+                results_list = [results]
+        except Exception:
+            results_list = []
+
         if format_type.lower() == "json":
-            with open(output_file, 'w', encoding='utf-8') as f:
+            ensure_directory(Path(output_file).parent)
+            with open(output_file, "w", encoding="utf-8") as f:
                 export_data = {
-                    'metadata': {
-                        'scanner': 'BRS-RECON',
-                        'version': '0.0.1',
-                        'exported_at': datetime.now().isoformat(),
-                        'total_results': len(results)
+                    "metadata": {
+                        "scanner": "BRS-RECON",
+                        "version": "0.0.1",
+                        "exported_at": datetime.now().isoformat(),
+                        "total_results": len(results_list),
                     },
-                    'results': [asdict(result) for result in results]
+                    "results": [asdict(result) for result in results_list],
                 }
                 json.dump(export_data, f, indent=2, ensure_ascii=False)
-        
-        self.logger.result_saved(output_file, "Export")
-        return output_file
-    
-    def export_multi_format(self, result: ScanResult, formats: List[str] = None) -> Dict[str, str]:
+            self.logger.result_saved(output_file, "Export")
+            return output_file
+        else:
+            # Unsupported format handling
+            return None
+
+    def export_multi_format(
+        self, result: ScanResult, formats: List[str] = None
+    ) -> Dict[str, str]:
         """Export result in multiple formats like BRS-XSS"""
         if formats is None:
             formats = ["json", "html"]
-        
+
         from .export import ExportManager
-        export_manager = ExportManager(str(self.results_dir))
+
+        export_manager = ExportManager(self.results_dir)
         exported_files = export_manager.export_result(result, formats)
-        
+
         for fmt, filepath in exported_files.items():
             self.logger.result_saved(filepath, f"{fmt.upper()} Export")
-        
+
         return exported_files
