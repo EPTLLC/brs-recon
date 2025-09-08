@@ -299,3 +299,4 @@ class TestCommandIntegration:
             # Verify configuration is accessible
             config_info = commands.get_configuration_info()
             assert config_info["security"]["safe_mode"] is False
+

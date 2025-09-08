@@ -493,3 +493,4 @@ class TestIntegrationScenarios:
 
         correlation_ids = [result[1] for result in collected_results]
         assert len(set(correlation_ids)) == 3
+

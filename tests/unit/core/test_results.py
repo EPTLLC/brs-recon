@@ -267,3 +267,4 @@ class TestResultsManager:
         # Search by scan type
         basic_results = self.results_manager.search_results(scan_type="basic")
         assert len(basic_results) == 3
+

@@ -2,8 +2,8 @@
 # Project: BRS-RECON (Network Reconnaissance Tool)
 # Company: EasyProTech LLC (www.easypro.tech)
 # Dev: Brabus
-# Date: 2025-09-07
-# Status: Created
+# Date: 2025-09-08T14:05:01Z
+# Status: Modified
 # Telegram: https://t.me/easyprotech
 
 name: CI/CD Pipeline
@@ -198,17 +198,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-      
     - name: Build Docker image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        push: false
-        tags: brs-recon:test
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+      run: docker build -t brs-recon:test .
+
+    - name: List Docker images (debug)
+      run: docker images
         
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master

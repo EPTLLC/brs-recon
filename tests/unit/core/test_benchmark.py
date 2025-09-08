@@ -269,3 +269,4 @@ class TestBenchmarkRunner:
         assert "BRS-RECON Performance Benchmark Report" in report
         assert "test_report" in report
         assert "Average Time:" in report
+
