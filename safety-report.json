@@ -17,7 +17,7 @@
         "account": "",
         "local_database_path": null,
         "safety_version": "3.6.1",
-        "timestamp": "2025-09-08 13:39:03",
+        "timestamp": "2025-09-08 14:18:39",
         "packages_found": 15,
         "vulnerabilities_found": 0,
         "vulnerabilities_ignored": 0,
@@ -42,8 +42,8 @@
         "git": {
             "branch": "main",
             "tag": "",
-            "commit": "542293be90c1b365f2e9d6ae443264074c54e9ca",
-            "dirty": "True",
+            "commit": "9732b969b929d734512e3b2eef0512738767581d",
+            "dirty": "False",
             "origin": "https://github.com/EPTLLC/brs-recon.git"
         },
         "project": null,
@@ -177,14 +177,14 @@
         },
         "aiohttp": {
             "name": "aiohttp",
-            "version": "3.12.14",
+            "version": "3.12.15",
             "requirements": [
                 {
-                    "raw": "aiohttp==3.12.14",
+                    "raw": "aiohttp==3.12.15",
                     "extras": [],
                     "marker": null,
                     "name": "aiohttp",
-                    "specifier": "==3.12.14",
+                    "specifier": "==3.12.15",
                     "url": null,
                     "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
                 }

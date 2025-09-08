@@ -17,7 +17,9 @@ python-dotenv==1.0.0
 python-nmap==0.7.1
 scapy==2.5.0
 requests==2.32.4
-aiohttp==3.12.15
+# Python 3.8 wheels are not available for aiohttp 3.12.15. Use an environment marker compatible approach in pyproject,
+# and keep a broadly compatible baseline here to avoid resolver failures on 3.8 runners.
+aiohttp==3.11.11
 asyncio-mqtt==0.13.0
 
 # Data processing and templating

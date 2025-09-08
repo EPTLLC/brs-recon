@@ -1,17 +1,17 @@
 {
   "errors": [],
-  "generated_at": "2025-09-08T10:07:01Z",
+  "generated_at": "2025-09-08T11:19:33Z",
   "metrics": {
     "_totals": {
-      "CONFIDENCE.HIGH": 28,
+      "CONFIDENCE.HIGH": 26,
       "CONFIDENCE.LOW": 0,
       "CONFIDENCE.MEDIUM": 0,
       "CONFIDENCE.UNDEFINED": 0,
       "SEVERITY.HIGH": 0,
-      "SEVERITY.LOW": 27,
+      "SEVERITY.LOW": 25,
       "SEVERITY.MEDIUM": 1,
       "SEVERITY.UNDEFINED": 0,
-      "loc": 5034,
+      "loc": 5031,
       "nosec": 0,
       "skipped_tests": 0
     },
@@ -172,15 +172,15 @@
       "skipped_tests": 0
     },
     "brsrecon/core/utils.py": {
-      "CONFIDENCE.HIGH": 10,
+      "CONFIDENCE.HIGH": 8,
       "CONFIDENCE.LOW": 0,
       "CONFIDENCE.MEDIUM": 0,
       "CONFIDENCE.UNDEFINED": 0,
       "SEVERITY.HIGH": 0,
-      "SEVERITY.LOW": 9,
+      "SEVERITY.LOW": 7,
       "SEVERITY.MEDIUM": 1,
       "SEVERITY.UNDEFINED": 0,
-      "loc": 335,
+      "loc": 332,
       "nosec": 0,
       "skipped_tests": 0
     },
@@ -547,47 +547,7 @@
       "test_name": "subprocess_without_shell_equals_true"
     },
     {
-      "code": "211     try:\n212         result = subprocess.run([\"which\", tool], capture_output=True, text=True)\n213         return result.returncode == 0\n",
-      "col_offset": 17,
-      "end_col_offset": 80,
-      "filename": "brsrecon/core/utils.py",
-      "issue_confidence": "HIGH",
-      "issue_cwe": {
-        "id": 78,
-        "link": "https://cwe.mitre.org/data/definitions/78.html"
-      },
-      "issue_severity": "LOW",
-      "issue_text": "Starting a process with a partial executable path",
-      "line_number": 212,
-      "line_range": [
-        212
-      ],
-      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b607_start_process_with_partial_path.html",
-      "test_id": "B607",
-      "test_name": "start_process_with_partial_path"
-    },
-    {
-      "code": "211     try:\n212         result = subprocess.run([\"which\", tool], capture_output=True, text=True)\n213         return result.returncode == 0\n",
-      "col_offset": 17,
-      "end_col_offset": 80,
-      "filename": "brsrecon/core/utils.py",
-      "issue_confidence": "HIGH",
-      "issue_cwe": {
-        "id": 78,
-        "link": "https://cwe.mitre.org/data/definitions/78.html"
-      },
-      "issue_severity": "LOW",
-      "issue_text": "subprocess call - check for execution of untrusted input.",
-      "line_number": 212,
-      "line_range": [
-        212
-      ],
-      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b603_subprocess_without_shell_equals_true.html",
-      "test_id": "B603",
-      "test_name": "subprocess_without_shell_equals_true"
-    },
-    {
-      "code": "273     try:\n274         import xml.etree.ElementTree as ET\n275 \n",
+      "code": "271     try:\n272         import xml.etree.ElementTree as ET\n273 \n",
       "col_offset": 8,
       "end_col_offset": 42,
       "filename": "brsrecon/core/utils.py",
@@ -598,16 +558,16 @@
       },
       "issue_severity": "LOW",
       "issue_text": "Using xml.etree.ElementTree to parse untrusted XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree with the equivalent defusedxml package, or make sure defusedxml.defuse_stdlib() is called.",
-      "line_number": 274,
+      "line_number": 272,
       "line_range": [
-        274
+        272
       ],
       "more_info": "https://bandit.readthedocs.io/en/1.8.6/blacklists/blacklist_imports.html#b405-import-xml-etree",
       "test_id": "B405",
       "test_name": "blacklist"
     },
     {
-      "code": "275 \n276         root = ET.fromstring(text)\n277     except Exception as e:\n",
+      "code": "273 \n274         root = ET.fromstring(text)\n275     except Exception as e:\n",
       "col_offset": 15,
       "end_col_offset": 34,
       "filename": "brsrecon/core/utils.py",
@@ -618,16 +578,16 @@
       },
       "issue_severity": "MEDIUM",
       "issue_text": "Using xml.etree.ElementTree.fromstring to parse untrusted XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib() is called",
-      "line_number": 276,
+      "line_number": 274,
       "line_range": [
-        276
+        274
       ],
       "more_info": "https://bandit.readthedocs.io/en/1.8.6/blacklists/blacklist_calls.html#b313-b320-xml-bad-elementtree",
       "test_id": "B314",
       "test_name": "blacklist"
     },
     {
-      "code": "291                 port_no = int(p.get(\"portid\"))\n292             except Exception:\n293                 continue\n294             state_el = p.find(\"state\")\n",
+      "code": "289                 port_no = int(p.get(\"portid\"))\n290             except Exception:\n291                 continue\n292             state_el = p.find(\"state\")\n",
       "col_offset": 12,
       "end_col_offset": 24,
       "filename": "brsrecon/core/utils.py",
@@ -638,17 +598,17 @@
       },
       "issue_severity": "LOW",
       "issue_text": "Try, Except, Continue detected.",
-      "line_number": 292,
+      "line_number": 290,
       "line_range": [
-        292,
-        293
+        290,
+        291
       ],
       "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b112_try_except_continue.html",
       "test_id": "B112",
       "test_name": "try_except_continue"
     },
     {
-      "code": "320                 results[\"services\"][port_no] = {\"service\": service, \"state\": state}\n321         except Exception:\n322             continue\n323     return results\n",
+      "code": "318                 results[\"services\"][port_no] = {\"service\": service, \"state\": state}\n319         except Exception:\n320             continue\n321     return results\n",
       "col_offset": 8,
       "end_col_offset": 20,
       "filename": "brsrecon/core/utils.py",
@@ -659,10 +619,10 @@
       },
       "issue_severity": "LOW",
       "issue_text": "Try, Except, Continue detected.",
-      "line_number": 321,
+      "line_number": 319,
       "line_range": [
-        321,
-        322
+        319,
+        320
       ],
       "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b112_try_except_continue.html",
       "test_id": "B112",

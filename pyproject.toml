@@ -60,7 +60,9 @@ dependencies = [
     "scapy>=2.5.0",
     "psutil>=5.9.0",
     "requests>=2.32.4",
-    "aiohttp>=3.12.15",
+    # aiohttp 3.12.x is not available for Python 3.8 on PyPI. Provide a compatible pin via markers.
+    "aiohttp>=3.12.14; python_version >= '3.9'",
+    "aiohttp>=3.8.1,<3.12.0; python_version < '3.9'",
     "asyncio-mqtt>=0.13.0",
     "pandas>=2.0.0",
     "jinja2>=3.1.6",

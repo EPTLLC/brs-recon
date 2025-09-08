@@ -27,7 +27,8 @@ Jinja2>=3.1.6
 typing-extensions>=4.0.0; python_version < "3.8"
 
 # Network library constraints
-aiohttp>=3.12.15,<4.0.0  # Major version constraint
+# aiohttp compatibility: 3.12.x lacks Python 3.8 wheels. Allow 3.8 runners to pick 3.11.x.
+aiohttp>=3.8.1,<4.0.0
 scapy>=2.5.0,<3.0.0    # Major version constraint
 
 # Testing framework constraints
