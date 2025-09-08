@@ -208,11 +208,8 @@ def run_command(
 
 def check_tool_availability(tool: str) -> bool:
     """Check if external tool is available"""
-    try:
-        result = subprocess.run(["which", tool], capture_output=True, text=True)
-        return result.returncode == 0
-    except Exception:
-        return False
+    import shutil
+    return shutil.which(tool) is not None
 
 
 def ensure_directory(path: Union[str, Path]) -> Path:

@@ -1,0 +1,14 @@
+{
+  "timestamp": "20250908-133526",
+  "target": "localhost",
+  "scan_type": "System Information",
+  "status": "failed",
+  "data": {},
+  "duration": 0.0010638236999511719,
+  "error": "Scan failed: Unknown scan type: invalid_type",
+  "metadata": {
+    "scanner": "BRS-RECON",
+    "version": "0.0.1",
+    "saved_at": "2025-09-08T13:35:26.185418"
+  }
+}

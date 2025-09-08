@@ -160,7 +160,7 @@ jobs:
         
     - name: Run Safety dependency check
       run: |
-        safety check --output json --file safety-report.json || true
+        safety check -r requirements/requirements.txt --save-json safety-report.json || true
       continue-on-error: true
       
     - name: Initialize CodeQL

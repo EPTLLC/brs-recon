@@ -1,0 +1,294 @@
+{
+    "report_meta": {
+        "scan_target": "files",
+        "scanned": [
+            "requirements/requirements.txt"
+        ],
+        "scanned_full_path": [
+            "/var/GitHub/brs-recon/requirements/requirements.txt"
+        ],
+        "target_languages": [
+            "python"
+        ],
+        "policy_file": null,
+        "policy_file_source": "local",
+        "audit_and_monitor": false,
+        "api_key": false,
+        "account": "",
+        "local_database_path": null,
+        "safety_version": "3.6.1",
+        "timestamp": "2025-09-08 13:39:03",
+        "packages_found": 15,
+        "vulnerabilities_found": 0,
+        "vulnerabilities_ignored": 0,
+        "remediations_recommended": 0,
+        "telemetry": {
+            "safety_options": {
+                "files": {
+                    "-r": 1
+                },
+                "save_json": {
+                    "--save-json": 1
+                }
+            },
+            "safety_version": "3.6.1",
+            "safety_source": "cli",
+            "os_type": "Linux",
+            "os_release": "6.8.0-79-generic",
+            "os_description": "Linux-6.8.0-79-generic-x86_64-with-glibc2.35",
+            "python_version": "3.10.12",
+            "safety_command": "check"
+        },
+        "git": {
+            "branch": "main",
+            "tag": "",
+            "commit": "542293be90c1b365f2e9d6ae443264074c54e9ca",
+            "dirty": "True",
+            "origin": "https://github.com/EPTLLC/brs-recon.git"
+        },
+        "project": null,
+        "json_version": "1.1",
+        "remediations_attempted": 0,
+        "remediations_completed": 0,
+        "remediation_mode": "INTERACTIVE"
+    },
+    "scanned_packages": {
+        "typer": {
+            "name": "typer",
+            "version": "0.9.0",
+            "requirements": [
+                {
+                    "raw": "typer[all]==0.9.0",
+                    "extras": [
+                        "all"
+                    ],
+                    "marker": null,
+                    "name": "typer",
+                    "specifier": "==0.9.0",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "rich": {
+            "name": "rich",
+            "version": "13.7.0",
+            "requirements": [
+                {
+                    "raw": "rich==13.7.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "rich",
+                    "specifier": "==13.7.0",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "pydantic": {
+            "name": "pydantic",
+            "version": "2.5.2",
+            "requirements": [
+                {
+                    "raw": "pydantic==2.5.2",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pydantic",
+                    "specifier": "==2.5.2",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "pyyaml": {
+            "name": "pyyaml",
+            "version": "6.0.1",
+            "requirements": [
+                {
+                    "raw": "PyYAML==6.0.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "PyYAML",
+                    "specifier": "==6.0.1",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "python-dotenv": {
+            "name": "python-dotenv",
+            "version": "1.0.0",
+            "requirements": [
+                {
+                    "raw": "python-dotenv==1.0.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "python-dotenv",
+                    "specifier": "==1.0.0",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "python-nmap": {
+            "name": "python-nmap",
+            "version": "0.7.1",
+            "requirements": [
+                {
+                    "raw": "python-nmap==0.7.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "python-nmap",
+                    "specifier": "==0.7.1",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "scapy": {
+            "name": "scapy",
+            "version": "2.5.0",
+            "requirements": [
+                {
+                    "raw": "scapy==2.5.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "scapy",
+                    "specifier": "==2.5.0",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "requests": {
+            "name": "requests",
+            "version": "2.32.4",
+            "requirements": [
+                {
+                    "raw": "requests==2.32.4",
+                    "extras": [],
+                    "marker": null,
+                    "name": "requests",
+                    "specifier": "==2.32.4",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "aiohttp": {
+            "name": "aiohttp",
+            "version": "3.12.14",
+            "requirements": [
+                {
+                    "raw": "aiohttp==3.12.14",
+                    "extras": [],
+                    "marker": null,
+                    "name": "aiohttp",
+                    "specifier": "==3.12.14",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "asyncio-mqtt": {
+            "name": "asyncio-mqtt",
+            "version": "0.13.0",
+            "requirements": [
+                {
+                    "raw": "asyncio-mqtt==0.13.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "asyncio-mqtt",
+                    "specifier": "==0.13.0",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "pandas": {
+            "name": "pandas",
+            "version": "2.1.4",
+            "requirements": [
+                {
+                    "raw": "pandas==2.1.4",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pandas",
+                    "specifier": "==2.1.4",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "jinja2": {
+            "name": "jinja2",
+            "version": "3.1.6",
+            "requirements": [
+                {
+                    "raw": "jinja2==3.1.6",
+                    "extras": [],
+                    "marker": null,
+                    "name": "jinja2",
+                    "specifier": "==3.1.6",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "psutil": {
+            "name": "psutil",
+            "version": "5.9.6",
+            "requirements": [
+                {
+                    "raw": "psutil==5.9.6",
+                    "extras": [],
+                    "marker": null,
+                    "name": "psutil",
+                    "specifier": "==5.9.6",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "ipaddress": {
+            "name": "ipaddress",
+            "version": "1.0.23",
+            "requirements": [
+                {
+                    "raw": "ipaddress==1.0.23; python_version < \"3.3\"",
+                    "extras": [],
+                    "marker": "python_version < \"3.3\"",
+                    "name": "ipaddress",
+                    "specifier": "==1.0.23",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        },
+        "pathlib2": {
+            "name": "pathlib2",
+            "version": "2.3.7",
+            "requirements": [
+                {
+                    "raw": "pathlib2==2.3.7; python_version < \"3.4\"",
+                    "extras": [],
+                    "marker": "python_version < \"3.4\"",
+                    "name": "pathlib2",
+                    "specifier": "==2.3.7",
+                    "url": null,
+                    "found": "/var/GitHub/brs-recon/requirements/requirements.txt"
+                }
+            ]
+        }
+    },
+    "affected_packages": {},
+    "announcements": [],
+    "vulnerabilities": [],
+    "ignored_vulnerabilities": [],
+    "remediations": {},
+    "remediations_results": {
+        "vulnerabilities_fixed": [],
+        "remediations_applied": {},
+        "remediations_skipped": {}
+    }
+}

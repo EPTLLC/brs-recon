@@ -16,11 +16,11 @@ setuptools>=65.5.1
 # CVE-2023-43804: urllib3 before 2.0.7
 urllib3>=2.0.7
 
-# CVE-2023-45803: requests before 2.31.0
-requests>=2.31.0
+# CVE-2024-35195, CVE-2024-47081: requests before 2.32.4
+requests>=2.32.4
 
-# CVE-2023-5752: Jinja2 before 3.1.2
-Jinja2>=3.1.2
+# CVE-2024-22195, CVE-2025-27516, CVE-2024-34064, CVE-2024-56326, CVE-2024-56201: Jinja2 before 3.1.6
+Jinja2>=3.1.6
 
 # Performance and compatibility constraints
 # Ensure compatibility with Python 3.8+
