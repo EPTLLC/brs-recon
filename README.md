@@ -65,19 +65,19 @@ pip3 install -r requirements/requirements.txt
 
 ```bash
 # Network discovery
-python3 -m brs-recon network 192.168.1.0/24 --method comprehensive
+brs-recon network 192.168.1.0/24 --method comprehensive
 
 # Port scanning with service detection
-python3 -m brs-recon ports target.com --ports top1000 --service-detection
+brs-recon ports target.com --ports top1000 --service-detection
 
 # Domain reconnaissance
-python3 -m brs-recon domain example.com --scan-type comprehensive
+brs-recon domain example.com --scan-type comprehensive
 
 # Vulnerability assessment
-python3 -m brs-recon vuln target.com --scan-type comprehensive --aggressive
+brs-recon vuln target.com --scan-type comprehensive --aggressive
 
 # System information
-python3 -m brs-recon system --scan-type full --processes
+brs-recon system --scan-type full --processes
 ```
 
 ### Docker Usage
@@ -128,9 +128,9 @@ Performance Enhancements:
 
 ```bash
 # Examples
-python3 -m brs-recon network 192.168.1.0/24 --method ping_sweep --threads 100
-python3 -m brs-recon network 10.0.0.0/16 --method comprehensive
-python3 -m brs-recon network target.com --method nmap_discovery
+brs-recon network 192.168.1.0/24 --method ping_sweep --threads 100
+brs-recon network 10.0.0.0/16 --method comprehensive
+brs-recon network target.com --method nmap_discovery
 ```
 
 ### 2. Port Scanning

@@ -1,0 +1,198 @@
+# BRS-RECON Bug Report Template
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: 2025-09-07
+# Status: Created
+# Telegram: https://t.me/easyprotech
+
+name: 🐛 Bug Report
+description: Report a bug or unexpected behavior in BRS-RECON
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug! Please fill out this form to help us investigate and fix the issue.
+        
+        **⚠️ Security Issues:** If this is a security vulnerability, please DO NOT create a public issue. 
+        Instead, report it privately via [SECURITY.md](../SECURITY.md).
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please confirm you have completed these steps
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: I have read the documentation and troubleshooting guide
+          required: true
+        - label: This is not a security vulnerability (use private reporting instead)
+          required: true
+        - label: I am using an officially supported version
+          required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: BRS-RECON Version
+      description: What version of BRS-RECON are you running?
+      placeholder: "0.0.1"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: installation
+    attributes:
+      label: Installation Method
+      description: How did you install BRS-RECON?
+      options:
+        - Source code (git clone)
+        - Docker container
+        - PyPI package (pip install)
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: Provide details about your environment
+      placeholder: |
+        - OS: Ubuntu 22.04 LTS
+        - Python: 3.10.6
+        - Architecture: x86_64
+        - Network tools: nmap 7.80, fping 5.0
+        - Docker version (if applicable): 20.10.17
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Clear and concise description of the bug
+      placeholder: Describe what happened and what you expected to happen
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the behavior
+      placeholder: |
+        1. Run command: `python3 -m brs-recon network 192.168.1.0/24`
+        2. Wait for scan completion
+        3. Check results directory
+        4. Error occurs...
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: The scan should complete successfully and generate results
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: The scan failed with an error message
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Messages and Logs
+      description: Include any error messages, stack traces, or relevant log output
+      placeholder: |
+        ```
+        Paste error messages, stack traces, or log output here
+        ```
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Command Used
+      description: The exact command that triggered the bug
+      placeholder: |
+        ```bash
+        python3 -m brs-recon network 192.168.1.0/24 --method comprehensive --threads 50
+        ```
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Configuration
+      description: Any custom configuration files or environment variables
+      placeholder: |
+        ```yaml
+        # config.yaml content or environment variables
+        ```
+      render: yaml
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Bug Severity
+      description: How severe is this bug?
+      options:
+        - Critical (application crash, data loss)
+        - High (major functionality broken)
+        - Medium (feature partially working)
+        - Low (minor issue, workaround available)
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround
+      description: If you found a workaround, please describe it
+      placeholder: Describe any temporary solution or workaround
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other information that might be helpful
+      placeholder: Screenshots, network diagrams, related issues, etc.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: permissions
+    attributes:
+      label: Permission and Legal
+      description: Please confirm the following
+      options:
+        - label: I have authorization to test the target systems mentioned
+          required: true
+        - label: This testing was conducted in accordance with applicable laws
+          required: true
+        - label: I agree to the project's code of conduct and ethical guidelines
+          required: true

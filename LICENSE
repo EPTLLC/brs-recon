@@ -1,80 +1,64 @@
-BRS-RECON DUAL LICENSE
+# BRS-RECON DUAL LICENSE
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: 2025-09-07
+# Status: Modified
+# Telegram: https://t.me/easyprotech
+
+BRS-RECON DUAL LICENSE STRUCTURE
 
 Copyright (c) 2025 EasyProTech LLC
-Contact: https://t.me/EasyProTech
+Contact: https://t.me/easyprotech
 
 ================================================================================
-DUAL LICENSE STRUCTURE
+DUAL LICENSE OPTIONS
 ================================================================================
 
-This software is available under two license options:
+This software is available under two license options. Choose the license that 
+best fits your use case:
 
-1. GPLv3 LICENSE (Open Source)
-2. COMMERCIAL LICENSE
+1. GPL-3.0-or-later (Open Source) - See LICENSE-GPL3
+2. Commercial License - See LICENSE-COMMERCIAL
 
-Choose the license that best fits your use case.
-
-================================================================================
-1. GPLv3 LICENSE (Open Source)
-================================================================================
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/>.
-
-APPLICABLE TO:
-- Educational projects
-- Research purposes
-- Open source projects
-- Non-commercial use
-
-REQUIREMENTS:
-- Source code must remain open
-- Derivative works must use GPLv3
-- Copyleft compliance required
+SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 
 ================================================================================
-2. COMMERCIAL LICENSE
+LICENSE SELECTION GUIDE
 ================================================================================
 
-For commercial entities, proprietary projects, or any use that does not
-comply with GPLv3 requirements, a commercial license is required.
+CHOOSE GPL-3.0 IF:
+- Educational or research use
+- Open source project development
+- Non-commercial applications
+- You can comply with copyleft requirements
 
-FEATURES:
-- No copyleft restrictions
-- Private/proprietary use allowed
-- Commercial distribution permitted
-- No source code disclosure required
-
-CONTACT FOR COMMERCIAL LICENSE:
-- Telegram: https://t.me/EasyProTech
-- Subject: "BRS-RECON Commercial License"
+CHOOSE COMMERCIAL LICENSE IF:
+- Commercial product development
+- Proprietary software integration
+- Cannot disclose source code
+- Need commercial support
 
 ================================================================================
-SUPPORT POLICY
+AUTHORIZATION NOTICE
 ================================================================================
 
-NO SUPPORT PROVIDED: This project is released as-is without support, 
-consultation, or assistance.
+This tool is designed for authorized security testing only. Users must:
+- Obtain explicit permission before testing any systems
+- Comply with applicable laws and regulations
+- Follow ethical hacking guidelines
+- Use only for legitimate security purposes
 
-Community contributions are welcome but not obligated.
+Unauthorized use may result in criminal prosecution under computer crime laws.
 
 ================================================================================
 DISCLAIMER
 ================================================================================
 
-This tool is intended for authorized security testing only. Users are 
-responsible for compliance with applicable laws and regulations.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+For detailed license terms, see:
+- LICENSE-GPL3 for GPL version 3 terms
+- LICENSE-COMMERCIAL for commercial license terms

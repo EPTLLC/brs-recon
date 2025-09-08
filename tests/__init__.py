@@ -1,11 +1,9 @@
-# BRS-RECON Production Dependencies
+# BRS-RECON Test Suite
 # Project: BRS-RECON (Network Reconnaissance Tool)
 # Company: EasyProTech LLC (www.easypro.tech)
 # Dev: Brabus
 # Date: 2025-09-07
-# Status: Modified
+# Status: Created
 # Telegram: https://t.me/easyprotech
 
-# Include base dependencies with version constraints
--r requirements-base.txt
--c constraints.txt
+"""Test suite for BRS-RECON network reconnaissance toolkit."""

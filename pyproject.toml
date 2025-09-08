@@ -1,0 +1,223 @@
+# BRS-RECON Project Configuration
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: 2025-09-07
+# Status: Created
+# Telegram: https://t.me/easyprotech
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "brs-recon"
+version = "0.0.1"
+description = "Python Network Reconnaissance Toolkit - Modular, async, enterprise-grade security assessment tool"
+readme = "README.md"
+license = {text = "GPL-3.0-or-later OR Commercial"}
+authors = [
+    {name = "Brabus", email = "mail.easypro.tech@gmail.com"},
+]
+maintainers = [
+    {name = "EasyProTech LLC", email = "mail.easypro.tech@gmail.com"},
+]
+keywords = [
+    "security",
+    "reconnaissance",
+    "network-scanning", 
+    "vulnerability-assessment",
+    "penetration-testing",
+    "cybersecurity",
+    "nmap",
+    "sarif"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: System :: Networking",
+    "Topic :: System :: Systems Administration",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "typer[all]>=0.9.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+    "PyYAML>=6.0",
+    "python-dotenv>=1.0.0",
+    "python-nmap>=0.7.1",
+    "scapy>=2.5.0",
+    "requests>=2.31.0",
+    "aiohttp>=3.8.0",
+    "asyncio-mqtt>=0.13.0",
+    "pandas>=2.0.0",
+    "jinja2>=3.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+    "pytest-xdist>=3.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "isort>=5.12.0",
+    "pre-commit>=3.0.0",
+    "bandit>=1.7.0",
+    "safety>=2.3.0",
+]
+test = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+    "pytest-xdist>=3.0.0",
+]
+docs = [
+    "mkdocs>=1.4.0",
+    "mkdocs-material>=9.0.0",
+    "mkdocstrings[python]>=0.20.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/EPTLLC/brs-recon"
+Documentation = "https://github.com/EPTLLC/brs-recon#readme"
+Repository = "https://github.com/EPTLLC/brs-recon.git"
+Issues = "https://github.com/EPTLLC/brs-recon/issues"
+Changelog = "https://github.com/EPTLLC/brs-recon/blob/main/CHANGELOG.md"
+Contact = "https://t.me/easyprotech"
+
+[project.scripts]
+brs-recon = "brsrecon.__main__:main"
+
+[tool.setuptools]
+packages = ["brsrecon"]
+
+# Black configuration
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+  | __pycache__
+)/
+'''
+
+# isort configuration
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["brsrecon"]
+
+# pytest configuration
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=brsrecon",
+    "--cov-report=term-missing",
+    "--cov-report=html:htmlcov",
+    "--cov-report=xml:coverage.xml",
+    "--cov-fail-under=80",
+    "-ra",
+    "--tb=short",
+]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "network: marks tests that require network access",
+    "privileged: marks tests that require elevated privileges",
+]
+filterwarnings = [
+    "error",
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+]
+
+# mypy configuration
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = [
+    "scapy.*",
+    "nmap.*",
+    "asyncio_mqtt.*",
+]
+ignore_missing_imports = true
+
+# Coverage configuration
+[tool.coverage.run]
+source = ["brsrecon"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/.venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+# Bandit security linting
+[tool.bandit]
+exclude_dirs = ["tests", "venv", ".venv"]
+skips = ["B101", "B601"]  # Skip assert_used and shell_injection_process for tests
+
+# Flake8 configuration (in setup.cfg since flake8 doesn't support pyproject.toml yet)

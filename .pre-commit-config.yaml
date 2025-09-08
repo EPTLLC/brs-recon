@@ -1,0 +1,123 @@
+# BRS-RECON Pre-commit Configuration
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: 2025-09-07
+# Status: Created
+# Telegram: https://t.me/easyprotech
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-yaml
+        args: [--unsafe]
+      - id: check-toml
+      - id: check-json
+      - id: check-xml
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: requirements-txt-fixer
+
+  - repo: https://github.com/psf/black
+    rev: 23.9.1
+    hooks:
+      - id: black
+        language_version: python3
+        args: [--line-length=88]
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: [--profile=black, --line-length=88]
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        additional_dependencies: [flake8-docstrings, flake8-bugbear]
+        args: [--max-line-length=88, --extend-ignore=E203,W503]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.6.1
+    hooks:
+      - id: mypy
+        additional_dependencies: [types-PyYAML, types-requests]
+        args: [--ignore-missing-imports, --no-strict-optional]
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        args: [-r, brs-recon/, -f, json, -o, bandit-report.json]
+        pass_filenames: false
+
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.3.0
+    hooks:
+      - id: pydocstyle
+        args: [--convention=google]
+        additional_dependencies: [toml]
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.15.0
+    hooks:
+      - id: pyupgrade
+        args: [--py38-plus]
+
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint-docker
+        args: [--ignore, DL3008, --ignore, DL3009]
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.32.0
+    hooks:
+      - id: yamllint
+        args: [-c=.yamllint.yml]
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.9.0.6
+    hooks:
+      - id: shellcheck
+        args: [-e, SC1091, -e, SC2155]
+
+  - repo: local
+    hooks:
+      - id: pytest-check
+        name: pytest-check
+        entry: pytest tests/unit/ -x --tb=short
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [commit]
+
+      - id: security-check
+        name: security-check
+        entry: safety check
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [push]
+
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit hooks
+
+    for more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: ''
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+  autoupdate_schedule: weekly
+  skip: [pytest-check, security-check]
+  submodules: false

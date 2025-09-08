@@ -1,0 +1,32 @@
+# BRS-RECON Testing Dependencies
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: 2025-09-07
+# Status: Created
+# Telegram: https://t.me/easyprotech
+
+# Include base requirements
+-r requirements-base.txt
+
+# Core testing framework
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+pytest-xdist==3.5.0
+pytest-timeout==2.2.0
+pytest-benchmark==4.0.0
+pytest-html==4.1.1
+
+# Test utilities
+factory-boy==3.3.0
+freezegun==1.2.2
+responses==0.24.1
+httpretty==1.1.4
+
+# Coverage reporting
+coverage[toml]==7.3.4
+
+# Performance testing
+locust==2.17.0

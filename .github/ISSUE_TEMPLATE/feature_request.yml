@@ -1,0 +1,236 @@
+# BRS-RECON Feature Request Template
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: 2025-09-07
+# Status: Created
+# Telegram: https://t.me/easyprotech
+
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement for BRS-RECON
+title: "[FEATURE] "
+labels: ["enhancement", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a new feature! Please provide detailed information to help us understand and evaluate your request.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please confirm you have completed these steps
+      options:
+        - label: I have searched existing issues and discussions to avoid duplicates
+          required: true
+        - label: I have reviewed the project roadmap and documentation
+          required: true
+        - label: This feature aligns with the project's ethical guidelines
+          required: true
+        - label: I understand this is a security tool for authorized testing only
+          required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      description: Which area does this feature request relate to?
+      options:
+        - Network Discovery
+        - Port Scanning
+        - Domain Reconnaissance
+        - Vulnerability Assessment
+        - System Information
+        - Export and Reporting
+        - Configuration and CLI
+        - Performance and Optimization
+        - Security and Authentication
+        - Documentation
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How important is this feature to you?
+      options:
+        - Critical (blocking current work)
+        - High (significantly improves workflow)
+        - Medium (nice to have improvement)
+        - Low (minor enhancement)
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve? What use case does it address?
+      placeholder: |
+        Describe the problem or limitation you're experiencing:
+        - What are you trying to accomplish?
+        - What current limitations prevent you from doing this?
+        - How does this impact your workflow?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe your proposed solution in detail
+      placeholder: |
+        Describe how you envision this feature working:
+        - What should the feature do?
+        - How should it integrate with existing functionality?
+        - What should the user interface look like?
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Usage Examples
+      description: Provide concrete examples of how this feature would be used
+      placeholder: |
+        ```bash
+        # Example command usage
+        python3 -m brs-recon new-feature target.com --option value
+        ```
+        
+        ```json
+        {
+          "example": "output format"
+        }
+        ```
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What alternative solutions have you considered?
+      placeholder: |
+        - Alternative approach 1: Description and why it's not ideal
+        - Alternative approach 2: Description and limitations
+        - Existing tools that partially solve this: Tool names and gaps
+    validations:
+      required: false
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Suggestions
+      description: If you have ideas about implementation, please share them
+      placeholder: |
+        - Technical approach suggestions
+        - Required dependencies or tools
+        - Potential challenges or considerations
+        - Code snippets or pseudo-code (if applicable)
+      render: markdown
+    validations:
+      required: false
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: Estimated Complexity
+      description: How complex do you think this feature would be to implement?
+      options:
+        - Simple (few lines of code, no new dependencies)
+        - Medium (moderate changes, some new logic)
+        - Complex (significant changes, new dependencies)
+        - Major (architectural changes, extensive testing)
+        - Unknown (not sure about complexity)
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: compatibility
+    attributes:
+      label: Compatibility Considerations
+      description: What compatibility aspects should be considered?
+      options:
+        - This feature should maintain backward compatibility
+        - This feature may require breaking changes
+        - This feature needs to work across all supported Python versions
+        - This feature should work in Docker containers
+        - This feature requires specific system dependencies
+        - This feature needs elevated privileges or capabilities
+
+  - type: textarea
+    id: testing
+    attributes:
+      label: Testing Considerations
+      description: How should this feature be tested?
+      placeholder: |
+        - Unit tests needed for specific functions
+        - Integration tests with external tools
+        - Performance testing requirements
+        - Security testing considerations
+        - Mock testing for external dependencies
+    validations:
+      required: false
+
+  - type: textarea
+    id: documentation
+    attributes:
+      label: Documentation Impact
+      description: What documentation would need to be updated?
+      placeholder: |
+        - README.md updates
+        - New command-line help text
+        - Configuration documentation
+        - Example usage in guides
+        - API documentation changes
+    validations:
+      required: false
+
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Contribution Interest
+      description: Are you interested in contributing to this feature?
+      options:
+        - "Yes, I'd like to implement this feature"
+        - "Yes, I can help with testing"
+        - "Yes, I can help with documentation"
+        - "Maybe, depending on complexity"
+        - "No, just suggesting the idea"
+    validations:
+      required: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References and Research
+      description: Any relevant links, papers, or existing implementations
+      placeholder: |
+        - Similar features in other tools
+        - Academic papers or research
+        - Standards or specifications
+        - Related GitHub issues or discussions
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: ethical
+    attributes:
+      label: Ethical and Legal Considerations
+      description: Please confirm the following
+      options:
+        - label: This feature is intended for authorized security testing only
+          required: true
+        - label: This feature does not facilitate unauthorized or malicious activities
+          required: true
+        - label: I understand the legal and ethical implications of this feature
+          required: true
+        - label: This feature aligns with responsible disclosure practices
+          required: true

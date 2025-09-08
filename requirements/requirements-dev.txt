@@ -1,0 +1,54 @@
+# BRS-RECON Development Dependencies
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: 2025-09-07
+# Status: Created
+# Telegram: https://t.me/easyprotech
+
+# Include base requirements
+-r requirements-base.txt
+
+# Testing framework and plugins
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+pytest-xdist==3.5.0
+pytest-timeout==2.2.0
+pytest-benchmark==4.0.0
+
+# Code quality and formatting
+black==23.12.0
+isort==5.13.2
+flake8==6.1.0
+flake8-docstrings==1.7.0
+flake8-bugbear==23.12.15
+mypy==1.8.0
+
+# Security scanning
+bandit==1.7.5
+safety==2.3.5
+
+# Pre-commit hooks
+pre-commit==3.6.0
+
+# Type stubs
+types-PyYAML==6.0.12.12
+types-requests==2.31.0.10
+types-setuptools==69.0.0.0
+
+# Development utilities
+ipython==8.18.1
+ipdb==0.13.13
+pdbpp==0.10.3
+
+# Documentation tools
+sphinx==7.2.6
+sphinx-rtd-theme==2.0.0
+myst-parser==2.0.0
+
+# Build tools
+build==1.0.3
+twine==4.0.2
+wheel==0.42.0

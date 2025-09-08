@@ -1,0 +1,321 @@
+# BRS-RECON CI/CD Pipeline
+# Project: BRS-RECON (Network Reconnaissance Tool)
+# Company: EasyProTech LLC (www.easypro.tech)
+# Dev: Brabus
+# Date: 2025-09-07
+# Status: Created
+# Telegram: https://t.me/easyprotech
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+env:
+  PYTHON_VERSION: "3.10"
+  POETRY_VERSION: "1.6.1"
+
+jobs:
+  lint:
+    name: Code Quality & Linting
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt', '**/pyproject.toml') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .[dev]
+        
+    - name: Run Black formatter check
+      run: black --check --diff brs-recon/
+      
+    - name: Run isort import sorting check
+      run: isort --check-only --diff brs-recon/
+      
+    - name: Run flake8 linting
+      run: flake8 brs-recon/
+      
+    - name: Run mypy type checking
+      run: mypy brs-recon/
+      continue-on-error: true  # Type checking is advisory for now
+      
+    - name: Run bandit security linting
+      run: bandit -r brs-recon/ -f json -o bandit-report.json
+      continue-on-error: true
+      
+    - name: Upload bandit results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: bandit-report
+        path: bandit-report.json
+
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-py${{ matrix.python-version }}-pip-${{ hashFiles('**/requirements*.txt', '**/pyproject.toml') }}
+        restore-keys: |
+          ${{ runner.os }}-py${{ matrix.python-version }}-pip-
+          
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y nmap fping masscan dig whois
+        
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .[test]
+        
+    - name: Run unit tests
+      run: |
+        pytest tests/unit/ -v --cov=brs_recon --cov-report=xml --cov-report=html
+        
+    - name: Run integration tests (non-privileged)
+      run: |
+        pytest tests/integration/ -v -m "not privileged" --cov-append --cov=brs_recon --cov-report=xml
+      continue-on-error: true  # Integration tests may fail in CI environment
+      
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      if: matrix.python-version == '3.10'
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results-py${{ matrix.python-version }}
+        path: |
+          coverage.xml
+          htmlcov/
+
+  security:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .[dev]
+        
+    - name: Run Safety dependency check
+      run: |
+        safety check --json --output safety-report.json
+      continue-on-error: true
+      
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: python
+        
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      
+    - name: Upload security reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: security-reports
+        path: |
+          safety-report.json
+          bandit-report.json
+
+  docker:
+    name: Docker Build & Security
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Build Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: false
+        tags: brs-recon:test
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: brs-recon:test
+        format: sarif
+        output: trivy-results.sarif
+        
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: trivy-results.sarif
+        
+    - name: Test Docker container
+      run: |
+        docker run --rm brs-recon:test --version
+        docker run --rm brs-recon:test --help
+
+  build:
+    name: Build Distribution
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Install build dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build twine
+        
+    - name: Build distribution
+      run: python -m build
+      
+    - name: Check distribution
+      run: twine check dist/*
+      
+    - name: Upload distribution artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: python-distribution
+        path: dist/
+
+  publish:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    needs: [lint, test, security, docker, build]
+    if: github.event_name == 'release' && github.event.action == 'published'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download distribution artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: python-distribution
+        path: dist/
+        
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Install publishing dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install twine
+        
+    - name: Publish to PyPI
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+      run: twine upload dist/*
+      if: env.TWINE_PASSWORD != ''
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ghcr.io/${{ github.repository }}
+        tags: |
+          type=ref,event=tag
+          type=raw,value=latest,enable={{is_default_branch}}
+          
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Generate SBOM
+      uses: anchore/sbom-action@v0
+      with:
+        image: ghcr.io/${{ github.repository }}:latest
+        format: spdx-json
+        output-file: sbom.spdx.json
+        
+    - name: Upload SBOM to release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: sbom.spdx.json
+        asset_name: sbom.spdx.json
+        asset_content_type: application/json
