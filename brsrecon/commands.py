@@ -52,7 +52,8 @@ class BRSCommands:
         # Validate requirements based on scan options
         if not self.vuln_scanner.validate_requirements(web_scan, ssl_scan):
             self.logger.error("Required tools not available for requested scan")
-            return None
+            # Align with test expectations: raise when tools are missing
+            raise RuntimeError("Required tools not available for requested scan")
 
         result = self.vuln_scanner.run_scan(
             target,

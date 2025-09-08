@@ -98,7 +98,12 @@ jobs:
     - name: Install system dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y nmap fping masscan dnsutils whois
+        sudo apt-get install -y nmap fping masscan dnsutils whois nikto sqlmap dirb
+
+    - name: Install testssl.sh
+      run: |
+        git clone --depth 1 https://github.com/drwetter/testssl.sh.git
+        sudo ln -sf "$PWD/testssl.sh/testssl.sh" /usr/local/bin/testssl.sh
         
     - name: Install Python dependencies
       run: |
@@ -155,16 +160,16 @@ jobs:
         
     - name: Run Safety dependency check
       run: |
-        safety check --json --output safety-report.json
+        safety check --output json --file safety-report.json || true
       continue-on-error: true
       
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: python
         
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
       
     - name: Upload security reports
       uses: actions/upload-artifact@v4

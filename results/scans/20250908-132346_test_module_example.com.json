@@ -1,0 +1,24 @@
+{
+  "timestamp": "20250908-132346",
+  "target": "example.com",
+  "scan_type": "test_module",
+  "status": "completed",
+  "data": {
+    "target": "example.com",
+    "results": [
+      "mock_result_1",
+      "mock_result_2"
+    ],
+    "kwargs": {
+      "threads": 20,
+      "aggressive": true
+    }
+  },
+  "duration": 0.010085582733154297,
+  "error": null,
+  "metadata": {
+    "scanner": "BRS-RECON",
+    "version": "0.0.1",
+    "saved_at": "2025-09-08T13:23:46.599931"
+  }
+}
