@@ -160,7 +160,11 @@ jobs:
         
     - name: Run Safety dependency check
       run: |
-        safety check -r requirements/requirements.txt --save-json safety-report.json || true
+        safety scan -r requirements/requirements.txt --save-json safety-report.json || true
+      continue-on-error: true
+      
+    - name: Run Bandit security linting
+      run: bandit -r brsrecon/ -f json -o bandit-report.json || true
       continue-on-error: true
       
     - name: Initialize CodeQL
