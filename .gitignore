@@ -67,11 +67,12 @@ temp/
 tmp/
 
 # Scan results (optional - uncomment to ignore)
-# results/scans/*.json
-# results/html/*.html
-# results/csv/*.csv
-# results/sarif/*.sarif
-# results/xml/*.xml
+results/scans/*.json
+results/html/*.html
+results/csv/*.csv
+results/sarif/*.sarif
+results/xml/*.xml
+results/exports/*.json
 
 # Configuration files with secrets
 config/secrets.yaml
@@ -84,6 +85,7 @@ config/local.yaml
 .pytest_cache/
 .coverage
 htmlcov/
+coverage.xml
 .tox/
 .nox/
 

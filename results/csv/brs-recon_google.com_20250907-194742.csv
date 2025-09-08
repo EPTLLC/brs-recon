@@ -1,3 +1,0 @@
-timestamp,target,scan_type,status,duration,type,port,service
-20250907-194742,google.com,Port Scanning,completed,2.0574324131011963,open_port,80,unknown
-20250907-194742,google.com,Port Scanning,completed,2.0574324131011963,open_port,443,unknown
