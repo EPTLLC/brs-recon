@@ -11,11 +11,20 @@ Telegram: https://t.me/easyprotech
 
 **Python Network Reconnaissance Toolkit**
 
-[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://python.org)
-[![License](https://img.shields.io/badge/license-Dual%20(GPLv3%2FCommercial)-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.0.2-red.svg)](CHANGELOG.md)
-[![SARIF Ready](https://img.shields.io/badge/SARIF-2.1.0-informational.svg)](https://docs.github.com/en/code-security/code-scanning)
-[![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](Dockerfile)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-3776ab?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![License](https://img.shields.io/badge/License-GPL%20v3-blue?style=for-the-badge&logo=gnu&logoColor=white)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-0.0.2-brightgreen?style=for-the-badge&logo=github&logoColor=white)](CHANGELOG.md)
+[![Platform](https://img.shields.io/badge/Platform-Linux-orange?style=for-the-badge&logo=linux&logoColor=white)](README.md)
+
+[![GitHub Stars](https://img.shields.io/github/stars/EPTLLC/brs-recon?style=for-the-badge&logo=github&logoColor=white)](https://github.com/EPTLLC/brs-recon/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/EPTLLC/brs-recon?style=for-the-badge&logo=github&logoColor=white)](https://github.com/EPTLLC/brs-recon/network)
+[![GitHub Issues](https://img.shields.io/github/issues/EPTLLC/brs-recon?style=for-the-badge&logo=github&logoColor=white)](https://github.com/EPTLLC/brs-recon/issues)
+[![GitHub Release](https://img.shields.io/github/v/release/EPTLLC/brs-recon?style=for-the-badge&logo=github&logoColor=white)](https://github.com/EPTLLC/brs-recon/releases)
+
+[![SARIF](https://img.shields.io/badge/SARIF-2.1.0-purple?style=for-the-badge&logo=security&logoColor=white)](https://docs.github.com/en/code-security/code-scanning)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ed?style=for-the-badge&logo=docker&logoColor=white)](Dockerfile)
+[![Security](https://img.shields.io/badge/Security-Enterprise-red?style=for-the-badge&logo=shield&logoColor=white)](SECURITY.md)
+[![EasyProTech](https://img.shields.io/badge/EasyProTech-LLC-gold?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/EasyProTech)
 
 **Company:** EasyProTech LLC (www.easypro.tech)  
 **Dev:** Brabus  

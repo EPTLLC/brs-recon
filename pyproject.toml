@@ -15,7 +15,7 @@ name = "brs-recon"
 version = "0.0.2"
 description = "Python Network Reconnaissance Toolkit - Modular, async, enterprise-grade security assessment tool"
 readme = "README.md"
-license = {text = "GPL-3.0-or-later OR Commercial"}
+license = {text = "GPL-3.0-or-later"}
 authors = [
     {name = "Brabus", email = "mail.easypro.tech@gmail.com"},
 ]
