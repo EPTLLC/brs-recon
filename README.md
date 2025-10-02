@@ -614,18 +614,15 @@ See [ETHICS.md](ETHICS.md) for complete ethical guidelines.
 
 ## Legal Compliance
 
-### BRS-RECON Dual License Structure
+### BRS-RECON License
 
-**Open Source (GPLv3):**
-- Educational, research, and open-source projects
+**GNU General Public License v3.0 (GPLv3):**
+- Open source projects and contributions
+- Educational, research, and non-commercial use
 - Requires source code disclosure for derivative works
 - Copyleft compliance mandatory
 
-**Commercial License:**
-- Commercial entities and proprietary projects  
-- No copyleft restrictions
-- Private use permitted
-- Contact: https://t.me/EasyProTech
+**For commercial licensing inquiries:** https://t.me/EasyProTech
 
 ### Important Legal Notice
 
@@ -633,7 +630,7 @@ See [ETHICS.md](ETHICS.md) for complete ethical guidelines.
 
 This tool is designed for legitimate security testing with proper authorization. Unauthorized use may result in criminal prosecution under computer crime laws worldwide.
 
-See [LEGAL.md](LEGAL.md) and [DISCLAIMER.md](DISCLAIMER.md) for complete terms.
+See [LICENSE](LICENSE), [LEGAL.md](LEGAL.md) and [DISCLAIMER.md](DISCLAIMER.md) for complete terms.
 
 ---
 
