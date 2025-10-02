@@ -176,7 +176,7 @@ def create_parser():
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
 
-    parser.add_argument("--version", action="version", version="BRS-RECON 0.0.1")
+    parser.add_argument("--version", action="version", version="BRS-RECON 0.0.2")
     parser.add_argument("--config", help="Configuration file path")
     parser.add_argument(
         "--log-level",

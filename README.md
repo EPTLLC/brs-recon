@@ -13,7 +13,7 @@ Telegram: https://t.me/easyprotech
 
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/license-Dual%20(GPLv3%2FCommercial)-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.0.1-red.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.0.2-red.svg)](CHANGELOG.md)
 [![SARIF Ready](https://img.shields.io/badge/SARIF-2.1.0-informational.svg)](https://docs.github.com/en/code-security/code-scanning)
 [![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](Dockerfile)
 
@@ -776,6 +776,6 @@ brs-xss scan web-applications.txt --aggr --deep
 
 ---
 
-**BRS-RECON v0.0.1** | **EasyProTech LLC** | **https://t.me/EasyProTech**
+**BRS-RECON v0.0.2** | **EasyProTech LLC** | **https://t.me/EasyProTech**
 
 _Python Evolution of [Brabus Recon Suite](https://github.com/EPTLLC/brs) with [BRS-XSS](https://github.com/EPTLLC/brs-xss) Architecture_
